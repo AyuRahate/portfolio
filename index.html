@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>AR.dev | Ayush Rahate Portfolio</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#FFD700",
+                        "secondary": "#8A2BE2",
+                        "background-light": "#f6f6f8",
+                        "background-dark": "#0F0A14",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style type="text/tailwindcss">
+        @layer utilities {
+            .grid-bg {
+                background-image: radial-gradient(circle at 2px 2px, rgba(255, 215, 0, 0.05) 1px, transparent 0);
+                background-size: 32px 32px;
+            }
+            .glow-blue {
+                box-shadow: 0 0 15px rgba(255, 215, 0, 0.4);
+            }
+            .glow-purple {
+                box-shadow: 0 0 15px rgba(138, 43, 226, 0.4);
+            }
+            .glass-panel {
+                @apply bg-[#0F0A14]/40 backdrop-blur-xl border border-white/10;
+            }
+            .fixed-background {
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100vh;
+                z-index: -2;
+                background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuA-mNyrxLqJaMkw-SJYvLd5bat2OTtbfDcGNtdjo8IpeYh37BzpL-hnbd9WfvWB__VyWnzDGEVh1QdQShssbiHzGKoSQvNNYDCi3PUgEX4Wvxbwq6KMJPVwsW9zcfrBK01rheYRCBu8DjnJb3Chgoz9WfmWTuD_OL239e0O9aor3t3qlyHSs7UfcCXpWjNliajihRE7zsTcxonmtTttbLx5OhmRGwxFtBEx7G9GX1_KphOuG24EALXWSv-z1amyI-h1nYdjfprHFHs');
+                background-size: cover;
+                background-position: center;
+                background-attachment: fixed;
+            }
+            .background-overlay {
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                z-index: -1;
+                background: linear-gradient(to bottom, rgba(15, 10, 20, 0.5), rgba(15, 10, 20, 0.9));
+            }
+        }
+        html {
+            scroll-behavior: smooth;
+        }
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0F0A14;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #FFD700;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body class="bg-background-dark font-display text-slate-100 overflow-x-hidden selection:bg-primary/30">
+<div class="fixed-background"></div>
+<div class="background-overlay"></div>
+<div class="fixed inset-0 grid-bg pointer-events-none z-0 opacity-50"></div>
+<div class="relative flex min-h-screen w-full flex-col">
+<header class="fixed top-0 z-[60] w-full border-b border-white/10 bg-background-dark/20 backdrop-blur-xl px-6 md:px-20 py-4">
+<div class="max-w-7xl mx-auto flex items-center justify-between">
+<div class="flex items-center gap-3">
+<div class="size-8 bg-primary rounded flex items-center justify-center text-background-dark">
+<span class="material-symbols-outlined">terminal</span>
+</div>
+<h2 class="text-xl font-bold tracking-tighter text-slate-100">ayurahate</h2>
+</div>
+<nav class="hidden md:flex items-center gap-10">
+<a class="text-sm font-medium hover:text-primary transition-colors" href="#about">About</a>
+<a class="text-sm font-medium hover:text-primary transition-colors" href="#skills">Skills</a>
+<a class="text-sm font-medium hover:text-primary transition-colors" href="#hobbies">Hobbies</a>
+<a class="text-sm font-medium hover:text-primary transition-colors" href="#contact">Contact</a>
+</nav>
+<button class="bg-primary hover:bg-primary/90 text-background-dark px-6 py-2 rounded-lg font-bold text-sm transition-all glow-blue">
+                    Hire Me
+                </button>
+</div>
+</header>
+<main class="flex-1 relative z-10 pt-20">
+<section class="min-h-screen flex items-center max-w-7xl mx-auto px-6 md:px-20 py-16 md:py-24">
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center w-full">
+<div class="space-y-8">
+<div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 border border-primary/30 text-primary text-xs font-bold uppercase tracking-widest">
+<span class="relative flex h-2 w-2">
+<span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
+<span class="relative inline-flex rounded-full h-2 w-2 bg-primary"></span>
+</span>
+                            Available for projects
+                        </div>
+<div class="space-y-4">
+<h1 class="text-6xl md:text-8xl font-black tracking-tighter text-transparent bg-clip-text bg-gradient-to-r from-primary via-secondary to-primary bg-[length:200%_auto]">
+                                AYUSH RAHATE
+                            </h1>
+<p class="text-2xl font-bold text-slate-200">"Code. Lift. Game. Repeat."</p>
+<p class="text-lg text-slate-300 max-w-lg leading-relaxed">
+                                Computer Engineering student at <span class="text-secondary">DJ Sanghvi College of Engineering</span>. 
+                                Building robust software while chasing personal records in the gym and high scores in the lobby.
+                            </p>
+</div>
+
+<div class="flex flex-wrap gap-4">
+
+  <!-- View Projects -->
+  <a href="#projects"
+     class="bg-primary text-background-dark px-8 py-4 rounded-xl font-black text-sm uppercase tracking-wider glow-blue hover:translate-y-[-2px] transition-all inline-block text-center">
+    View Projects
+  </a>
+
+  <!-- Download CV -->
+  <a href="AYUSH_RESUME.pdf" download
+     class="border border-slate-700 hover:border-primary px-8 py-4 rounded-xl font-black text-sm uppercase tracking-wider transition-all backdrop-blur-sm text-slate-100 hover:bg-primary hover:text-background-dark inline-block text-center">
+    Download CV
+  </a>
+
+</div>
+
+</div>
+<div class="hidden lg:block relative group">
+<div class="glass-panel p-6 rounded-2xl border border-white/20 max-w-md ml-auto hover:bg-[#0F0A14]/60 transition-all duration-500">
+<div class="flex items-center justify-between mb-4">
+<div>
+<p class="text-xs text-slate-400 uppercase tracking-widest font-bold">Current Activity</p>
+<p class="text-lg font-bold">Optimizing Algorithms</p>
+</div>
+<span class="material-symbols-outlined text-primary scale-150">bolt</span>
+</div>
+<div class="h-1 bg-white/10 rounded-full overflow-hidden">
+<div class="h-full bg-primary w-[75%]"></div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<div class="max-w-7xl mx-auto px-6 md:px-20 space-y-32 pb-32">
+
+<!-- Project -->
+<section id="projects" class="glass-panel rounded-[2rem] p-12 md:p-20 shadow-2xl">
+  <h2 class="text-primary font-black text-sm uppercase tracking-[0.3em] mb-8 text-center">
+    // PROJECTS
+  </h2>
+
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+
+    <!-- Project 1 -->
+    <div class="p-6 border border-white/10 rounded-xl bg-white/5">
+      <h3 class="text-xl font-bold">Baby Monitoring System</h3>
+      <p class="text-slate-400 mt-2">
+        AI-based system using MFCC + CNN to detect infant cries and posture.
+      </p>
+      <a href="#" class="text-primary mt-3 inline-block">View Project →</a>
+    </div>
+
+    <!-- Project 2 -->
+    <div class="p-6 border border-white/10 rounded-xl bg-white/5">
+      <h3 class="text-xl font-bold">Portfolio Website</h3>
+      <p class="text-slate-400 mt-2">
+        Personal portfolio with modern UI, animations, and responsive design.
+      </p>
+      <a href="#" class="text-primary mt-3 inline-block">View Code →</a>
+    </div>
+
+  </div>
+</section>
+
+<section class="glass-panel rounded-[2rem] p-12 md:p-20 shadow-2xl transform transition-transform hover:scale-[1.01] duration-500" id="about">
+<div class="max-w-3xl">
+<h2 class="text-primary font-black text-sm uppercase tracking-[0.3em] mb-4">// ABOUT ME</h2>
+<h3 class="text-4xl font-bold mb-6 text-slate-100">Discipline in the gym, <span class="text-secondary">Logic</span> in the code.</h3>
+<p class="text-xl text-slate-300 leading-relaxed">
+                            Casual, real, and focused. I blend the discipline of the gym with the logic of coding. Whether I'm hitting a PR or debugging a complex script, I bring the same intensity. 
+                            Consistency is my middle name. I don't just build apps; I engineer solutions that are as lean and efficient as a perfect deadlift form.
+                        </p>
+</div>
+</section>
+<section class="glass-panel rounded-[2rem] p-12 md:p-20 shadow-2xl transform transition-transform hover:scale-[1.01] duration-500" id="skills">
+<h2 class="text-secondary font-black text-sm uppercase tracking-[0.3em] mb-12 text-center">// CORE STACK</h2>
+<div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
+<div class="p-8 rounded-2xl bg-white/5 border border-white/10 hover:border-primary transition-all group backdrop-blur-sm">
+<div class="size-12 rounded-lg bg-primary/10 flex items-center justify-center text-primary mb-6 group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined">coffee</span>
+</div>
+<h4 class="text-xl font-bold mb-2">Java</h4>
+<p class="text-sm text-slate-400">Robust backend &amp; Enterprise apps</p>
+</div>
+<div class="p-8 rounded-2xl bg-white/5 border border-white/10 hover:border-primary transition-all group backdrop-blur-sm">
+<div class="size-12 rounded-lg bg-primary/10 flex items-center justify-center text-primary mb-6 group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined">data_object</span>
+</div>
+<h4 class="text-xl font-bold mb-2">Python</h4>
+<p class="text-sm text-slate-400">Automation, AI &amp; Scripting</p>
+</div>
+<div class="p-8 rounded-2xl bg-white/5 border border-white/10 hover:border-primary transition-all group backdrop-blur-sm">
+<div class="size-12 rounded-lg bg-primary/10 flex items-center justify-center text-primary mb-6 group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined">memory</span>
+</div>
+<h4 class="text-xl font-bold mb-2">C Language</h4>
+<p class="text-sm text-slate-400">Low-level &amp; System architecture</p>
+</div>
+<div class="p-8 rounded-2xl bg-white/5 border border-white/10 hover:border-primary transition-all group backdrop-blur-sm">
+<div class="size-12 rounded-lg bg-primary/10 flex items-center justify-center text-primary mb-6 group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined">web</span>
+</div>
+<h4 class="text-xl font-bold mb-2">Frontend &amp; AI Integration</h4>
+<p class="text-sm text-slate-400">Moderate Level</p>
+</div>
+</div>
+</section>
+<section class="glass-panel rounded-[2rem] p-12 md:p-20 shadow-2xl transform transition-transform hover:scale-[1.01] duration-500" id="hobbies">
+<h2 class="text-slate-100 font-black text-sm uppercase tracking-[0.3em] mb-12 text-center">// LIFESTYLE</h2>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+<div class="relative h-64 rounded-2xl overflow-hidden group border border-white/10">
+<div class="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-110" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCgMaee0TfiAlNNJ-03c-lwASRsIpU9nfPvV91Yej8Wq_tC2X78X8zoiDaQ9FdkNTs4dFrzRK9gcymc-uoZOW3nqzm0mum6OU1_ohnsQlFv4d_KA3ujFCFgR2oz8bNjearaaZDTBgOyAeJ_gk9VgygFtgN5gi7LwJK3p4OraKikmkyy4NzadY0s3mQMAQfXW0BmBAHnS06AqQv70jwhB6gnK_lkNQe1LF2UfYcLvMAgBTxPYcAxoTY6GHduGJsG5fuqleQTnNDjYmE');"></div>
+<div class="absolute inset-0 bg-gradient-to-t from-background-dark to-transparent"></div>
+<div class="absolute bottom-6 left-6 flex items-center gap-3">
+<span class="text-3xl">🎮</span>
+<h4 class="text-xl font-bold text-slate-100">Gaming</h4>
+</div>
+</div>
+<div class="relative h-64 rounded-2xl overflow-hidden group border border-white/10">
+<div class="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-110" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuD7wgz3CoGnGs7uLlJ2IMdMoF5ub5fDtDZNxhOEmkJpFGYT2Gry6veo8JT4G7w38fvMbG3-mE9hCSNFMmuG06dzqH7YtdRQBX2jDrN8RC30uR9bxgo7QhLdJ_OX9Y-nqI5Wr7_nuk6QRSj_zqU_c-nMVCXmHojJXmrVlQJ4KEjm8tE78FVuC7kQ2yiwIZOzqio5uMA4y3hE5utWbVq6_BkUBHHuCnQIpj0GwO6rJ_oxr6hyEphdjUzqYDEyMeWc75QZ3ll6Zu620Go');"></div>
+<div class="absolute inset-0 bg-gradient-to-t from-background-dark to-transparent"></div>
+<div class="absolute bottom-6 left-6 flex items-center gap-3">
+<span class="text-3xl">💻</span>
+<h4 class="text-xl font-bold text-slate-100">Coding</h4>
+</div>
+</div>
+<div class="relative h-64 rounded-2xl overflow-hidden group border border-white/10">
+<div class="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-110" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAENTKr4TX_6Qkm7-mnqrviKo2cNcBr1L1-bmQ3cvR1Arf00Tpp_OuSqwzLTcGf3ZOTV8QLyamHP9_sEALaNUaEkz2HZOR0M4umvsbham1JnFyJ8c1BSnv7-LQoM3ZnkC4JhhX4szE3tLTEOw8med9bJg0jFhUd3UrcbCq_iDNUpAUEqWGHRPccrI48Wpjh3YPZk1KqhghTgkwv2Z5s1aRQypuZrPjbUlbvMywUzHQoX2DRZiLJzwZAIuK-CE1esz1Q0NbRCtp_plw');"></div>
+<div class="absolute inset-0 bg-gradient-to-t from-background-dark to-transparent"></div>
+<div class="absolute bottom-6 left-6 flex items-center gap-3">
+<span class="text-3xl">🏋️</span>
+<h4 class="text-xl font-bold text-slate-100">Gym/Fitness</h4>
+</div>
+</div>
+</div>
+</section>
+<section class="glass-panel rounded-[2rem] p-12 md:p-20 shadow-2xl text-center transform transition-transform hover:scale-[1.01] duration-500" id="contact">
+<h2 class="text-4xl md:text-5xl font-black mb-8 text-slate-100">Let's build something <span class="text-primary">Legendary</span>.</h2>
+<p class="text-slate-400 max-w-xl mx-auto mb-10">Open for collaborations, coffee chats, or just a quick competitive match.</p>
+<div class="flex flex-col md:flex-row items-center justify-center gap-6">
+<a class="flex items-center gap-3 bg-white/5 border border-white/10 px-8 py-4 rounded-xl hover:bg-primary hover:text-background-dark transition-all group backdrop-blur-md" href="mailto:ayushrahate32@gmail.com">
+<span class="material-symbols-outlined text-primary group-hover:text-background-dark">mail</span>
+<span class="font-bold">ayushrahate32@gmail.com</span>
+</a>
+<a class="flex items-center gap-3 bg-white/5 border border-white/10 px-8 py-4 rounded-xl hover:bg-primary hover:text-background-dark transition-all group backdrop-blur-md" href="https://www.linkedin.com/in/ayush-rahate-4802ab32b/">
+<span class="material-symbols-outlined text-primary group-hover:text-background-dark">person_add</span>
+<span class="font-bold">LinkedIn</span>
+</a>
+</div>
+</section>
+</div>
+</main>
+<footer class="relative z-10 border-t border-white/10 bg-background-dark/60 backdrop-blur-2xl py-12">
+<div class="max-w-7xl mx-auto px-6 md:px-20 flex flex-col md:flex-row items-center justify-between gap-6">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-secondary">verified</span>
+<p class="text-slate-500 text-sm">© 2026 Ayush Rahate</p>
+</div>
+<p class="text-slate-400 font-medium italic">"Built with code, caffeine, and consistency"</p>
+<div class="flex gap-4">
+<a class="size-10 rounded-full border border-white/10 flex items-center justify-center hover:bg-white/10 transition-colors" href="#">
+<span class="material-symbols-outlined text-slate-400 text-sm">share</span>
+</a>
+<a class="size-10 rounded-full border border-white/10 flex items-center justify-center hover:bg-white/10 transition-colors" href="#">
+<span class="material-symbols-outlined text-slate-400 text-sm">code</span>
+</a>
+</div>
+</div>
+</footer>
+</div>
+
+</body></html>
+
+<script src="script.js"></script>
