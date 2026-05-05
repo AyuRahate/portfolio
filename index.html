@@ -1,304 +1,584 @@
 <!DOCTYPE html>
-<html class="dark" lang="en"><head>
-<meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>AR.dev | Ayush Rahate Portfolio</title>
-<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&amp;display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
-<script id="tailwind-config">
-        tailwind.config = {
-            darkMode: "class",
-            theme: {
-                extend: {
-                    colors: {
-                        "primary": "#FFD700",
-                        "secondary": "#8A2BE2",
-                        "background-light": "#f6f6f8",
-                        "background-dark": "#0F0A14",
-                    },
-                    fontFamily: {
-                        "display": ["Inter", "sans-serif"]
-                    },
-                    borderRadius: {
-                        "DEFAULT": "0.25rem",
-                        "lg": "0.5rem",
-                        "xl": "0.75rem",
-                        "full": "9999px"
-                    },
-                },
-            },
-        }
-    </script>
-<style type="text/tailwindcss">
-        @layer utilities {
-            .grid-bg {
-                background-image: radial-gradient(circle at 2px 2px, rgba(255, 215, 0, 0.05) 1px, transparent 0);
-                background-size: 32px 32px;
-            }
-            .glow-blue {
-                box-shadow: 0 0 15px rgba(255, 215, 0, 0.4);
-            }
-            .glow-purple {
-                box-shadow: 0 0 15px rgba(138, 43, 226, 0.4);
-            }
-            .glass-panel {
-                @apply bg-[#0F0A14]/40 backdrop-blur-xl border border-white/10;
-            }
-            .fixed-background {
-                position: fixed;
-                top: 0;
-                left: 0;
-                width: 100%;
-                height: 100vh;
-                z-index: -2;
-                background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuA-mNyrxLqJaMkw-SJYvLd5bat2OTtbfDcGNtdjo8IpeYh37BzpL-hnbd9WfvWB__VyWnzDGEVh1QdQShssbiHzGKoSQvNNYDCi3PUgEX4Wvxbwq6KMJPVwsW9zcfrBK01rheYRCBu8DjnJb3Chgoz9WfmWTuD_OL239e0O9aor3t3qlyHSs7UfcCXpWjNliajihRE7zsTcxonmtTttbLx5OhmRGwxFtBEx7G9GX1_KphOuG24EALXWSv-z1amyI-h1nYdjfprHFHs');
-                background-size: cover;
-                background-position: center;
-                background-attachment: fixed;
-            }
-            .background-overlay {
-                position: fixed;
-                top: 0;
-                left: 0;
-                width: 100%;
-                height: 100%;
-                z-index: -1;
-                background: linear-gradient(to bottom, rgba(15, 10, 20, 0.5), rgba(15, 10, 20, 0.9));
-            }
-        }
-        html {
-            scroll-behavior: smooth;
-        }
-        ::-webkit-scrollbar {
-            width: 8px;
-        }
-        ::-webkit-scrollbar-track {
-            background: #0F0A14;
-        }
-        ::-webkit-scrollbar-thumb {
-            background: #FFD700;
-            border-radius: 4px;
-        }
-    </style>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ayush Rahate — Developer Portfolio</title>
+  <meta name="description" content="Ayush Rahate — Computer Engineering student at DJ Sanghvi, building robust software with discipline and logic. View projects, skills, and experience." />
+  <meta name="author" content="Ayush Rahate" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
 </head>
-<body class="bg-background-dark font-display text-slate-100 overflow-x-hidden selection:bg-primary/30">
-<div class="fixed-background"></div>
-<div class="background-overlay"></div>
-<div class="fixed inset-0 grid-bg pointer-events-none z-0 opacity-50"></div>
-<div class="relative flex min-h-screen w-full flex-col">
-<header class="fixed top-0 z-[60] w-full border-b border-white/10 bg-background-dark/20 backdrop-blur-xl px-6 md:px-20 py-4">
-<div class="max-w-7xl mx-auto flex items-center justify-between">
-<div class="flex items-center gap-3">
-<div class="size-8 bg-primary rounded flex items-center justify-center text-background-dark">
-<span class="material-symbols-outlined">terminal</span>
-</div>
-<h2 class="text-xl font-bold tracking-tighter text-slate-100">ayurahate</h2>
-</div>
-<nav class="hidden md:flex items-center gap-10">
-<a class="text-sm font-medium hover:text-primary transition-colors" href="#about">About</a>
-<a class="text-sm font-medium hover:text-primary transition-colors" href="#skills">Skills</a>
-<a class="text-sm font-medium hover:text-primary transition-colors" href="#hobbies">Hobbies</a>
-<a class="text-sm font-medium hover:text-primary transition-colors" href="#contact">Contact</a>
-</nav>
-<button class="bg-primary hover:bg-primary/90 text-background-dark px-6 py-2 rounded-lg font-bold text-sm transition-all glow-blue">
-                    Hire Me
-                </button>
-</div>
-</header>
-<main class="flex-1 relative z-10 pt-20">
-<section class="min-h-screen flex items-center max-w-7xl mx-auto px-6 md:px-20 py-16 md:py-24">
-<div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center w-full">
-<div class="space-y-8">
-<div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 border border-primary/30 text-primary text-xs font-bold uppercase tracking-widest">
-<span class="relative flex h-2 w-2">
-<span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
-<span class="relative inline-flex rounded-full h-2 w-2 bg-primary"></span>
-</span>
-                            Available for projects
-                        </div>
-<div class="space-y-4">
-<h1 class="text-6xl md:text-8xl font-black tracking-tighter text-transparent bg-clip-text bg-gradient-to-r from-primary via-secondary to-primary bg-[length:200%_auto]">
-                                AYUSH RAHATE
-                            </h1>
-<p class="text-2xl font-bold text-slate-200">"Code. Lift. Game. Repeat."</p>
-<p class="text-lg text-slate-300 max-w-lg leading-relaxed">
-                                Computer Engineering student at <span class="text-secondary">DJ Sanghvi College of Engineering</span>. 
-                                Building robust software while chasing personal records in the gym and high scores in the lobby.
-                            </p>
-</div>
+<body>
 
-<div class="flex flex-wrap gap-4">
+  <!-- Background Effects -->
+  <div class="bg-grid"></div>
+  <div class="bg-glow bg-glow--primary"></div>
+  <div class="bg-glow bg-glow--secondary"></div>
 
-  <!-- View Projects -->
-  <a href="#projects"
-     class="bg-primary text-background-dark px-8 py-4 rounded-xl font-black text-sm uppercase tracking-wider glow-blue hover:translate-y-[-2px] transition-all inline-block text-center">
-    View Projects
-  </a>
-
-  <!-- Download CV -->
-  <a href="AYUSH_RESUME.pdf" download
-     class="border border-slate-700 hover:border-primary px-8 py-4 rounded-xl font-black text-sm uppercase tracking-wider transition-all backdrop-blur-sm text-slate-100 hover:bg-primary hover:text-background-dark inline-block text-center">
-    Download CV
-  </a>
-
-</div>
-
-</div>
-<div class="hidden lg:block relative group">
-<div class="glass-panel p-6 rounded-2xl border border-white/20 max-w-md ml-auto hover:bg-[#0F0A14]/60 transition-all duration-500">
-<div class="flex items-center justify-between mb-4">
-<div>
-<p class="text-xs text-slate-400 uppercase tracking-widest font-bold">Current Activity</p>
-<p class="text-lg font-bold">Optimizing Algorithms</p>
-</div>
-<span class="material-symbols-outlined text-primary scale-150">bolt</span>
-</div>
-<div class="h-1 bg-white/10 rounded-full overflow-hidden">
-<div class="h-full bg-primary w-[75%]"></div>
-</div>
-</div>
-</div>
-</div>
-</section>
-<div class="max-w-7xl mx-auto px-6 md:px-20 space-y-32 pb-32">
-
-<!-- Project -->
-<section id="projects" class="glass-panel rounded-[2rem] p-12 md:p-20 shadow-2xl">
-  <h2 class="text-primary font-black text-sm uppercase tracking-[0.3em] mb-8 text-center">
-    // PROJECTS
-  </h2>
-
-  <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-
-    <!-- Project 1 -->
-    <div class="p-6 border border-white/10 rounded-xl bg-white/5">
-      <h3 class="text-xl font-bold">Baby Monitoring System</h3>
-      <p class="text-slate-400 mt-2">
-        AI-based system using MFCC + CNN to detect infant cries and posture.
-      </p>
-      <a href="#" class="text-primary mt-3 inline-block">View Project →</a>
+  <!-- ===================== NAVBAR ===================== -->
+  <nav class="navbar" id="navbar">
+    <div class="container navbar__inner">
+      <a href="#" class="navbar__logo">
+        <div class="navbar__logo-icon">AR</div>
+        <span>ayurahate</span>
+      </a>
+      <div class="navbar__links" id="navLinks">
+        <a href="#about">About</a>
+        <a href="#projects">Projects</a>
+        <a href="#skills">Skills</a>
+        <a href="#experience">Experience</a>
+        <a href="#contact">Contact</a>
+      </div>
+      <div class="navbar__actions">
+        <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark/light mode">
+          <span class="material-symbols-outlined" id="themeIcon">dark_mode</span>
+        </button>
+        <a href="#contact" class="btn-primary nav-hire">Hire Me</a>
+        <div class="hamburger" id="hamburger">
+          <span></span><span></span><span></span>
+        </div>
+      </div>
     </div>
+  </nav>
 
-    <!-- Project 2 -->
-    <div class="p-6 border border-white/10 rounded-xl bg-white/5">
-      <h3 class="text-xl font-bold">Portfolio Website</h3>
-      <p class="text-slate-400 mt-2">
-        Personal portfolio with modern UI, animations, and responsive design.
-      </p>
-      <a href="#" class="text-primary mt-3 inline-block">View Code →</a>
-    </div>
-
+  <!-- Mobile Nav -->
+  <div class="mobile-nav" id="mobileNav">
+    <a href="#about">About</a>
+    <a href="#projects">Projects</a>
+    <a href="#skills">Skills</a>
+    <a href="#experience">Experience</a>
+    <a href="#contact">Contact</a>
+    <button class="theme-toggle" id="themeToggleMobile" aria-label="Toggle theme">
+      <span class="material-symbols-outlined" id="themeIconMobile">dark_mode</span>
+    </button>
   </div>
-</section>
 
-<section class="glass-panel rounded-[2rem] p-12 md:p-20 shadow-2xl transform transition-transform hover:scale-[1.01] duration-500" id="about">
-<div class="max-w-3xl">
-<h2 class="text-primary font-black text-sm uppercase tracking-[0.3em] mb-4">// ABOUT ME</h2>
-<h3 class="text-4xl font-bold mb-6 text-slate-100">Discipline in the gym, <span class="text-secondary">Logic</span> in the code.</h3>
-<p class="text-xl text-slate-300 leading-relaxed">
-                            Casual, real, and focused. I blend the discipline of the gym with the logic of coding. Whether I'm hitting a PR or debugging a complex script, I bring the same intensity. 
-                            Consistency is my middle name. I don't just build apps; I engineer solutions that are as lean and efficient as a perfect deadlift form.
-                        </p>
-</div>
-</section>
-<section class="glass-panel rounded-[2rem] p-12 md:p-20 shadow-2xl transform transition-transform hover:scale-[1.01] duration-500" id="skills">
-<h2 class="text-secondary font-black text-sm uppercase tracking-[0.3em] mb-12 text-center">// CORE STACK</h2>
-<div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
-<div class="p-8 rounded-2xl bg-white/5 border border-white/10 hover:border-primary transition-all group backdrop-blur-sm">
-<div class="size-12 rounded-lg bg-primary/10 flex items-center justify-center text-primary mb-6 group-hover:scale-110 transition-transform">
-<span class="material-symbols-outlined">coffee</span>
-</div>
-<h4 class="text-xl font-bold mb-2">Java</h4>
-<p class="text-sm text-slate-400">Robust backend &amp; Enterprise apps</p>
-</div>
-<div class="p-8 rounded-2xl bg-white/5 border border-white/10 hover:border-primary transition-all group backdrop-blur-sm">
-<div class="size-12 rounded-lg bg-primary/10 flex items-center justify-center text-primary mb-6 group-hover:scale-110 transition-transform">
-<span class="material-symbols-outlined">data_object</span>
-</div>
-<h4 class="text-xl font-bold mb-2">Python</h4>
-<p class="text-sm text-slate-400">Automation, AI &amp; Scripting</p>
-</div>
-<div class="p-8 rounded-2xl bg-white/5 border border-white/10 hover:border-primary transition-all group backdrop-blur-sm">
-<div class="size-12 rounded-lg bg-primary/10 flex items-center justify-center text-primary mb-6 group-hover:scale-110 transition-transform">
-<span class="material-symbols-outlined">memory</span>
-</div>
-<h4 class="text-xl font-bold mb-2">C Language</h4>
-<p class="text-sm text-slate-400">Low-level &amp; System architecture</p>
-</div>
-<div class="p-8 rounded-2xl bg-white/5 border border-white/10 hover:border-primary transition-all group backdrop-blur-sm">
-<div class="size-12 rounded-lg bg-primary/10 flex items-center justify-center text-primary mb-6 group-hover:scale-110 transition-transform">
-<span class="material-symbols-outlined">web</span>
-</div>
-<h4 class="text-xl font-bold mb-2">Frontend &amp; AI Integration</h4>
-<p class="text-sm text-slate-400">Moderate Level</p>
-</div>
-</div>
-</section>
-<section class="glass-panel rounded-[2rem] p-12 md:p-20 shadow-2xl transform transition-transform hover:scale-[1.01] duration-500" id="hobbies">
-<h2 class="text-slate-100 font-black text-sm uppercase tracking-[0.3em] mb-12 text-center">// LIFESTYLE</h2>
-<div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-<div class="relative h-64 rounded-2xl overflow-hidden group border border-white/10">
-<div class="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-110" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCgMaee0TfiAlNNJ-03c-lwASRsIpU9nfPvV91Yej8Wq_tC2X78X8zoiDaQ9FdkNTs4dFrzRK9gcymc-uoZOW3nqzm0mum6OU1_ohnsQlFv4d_KA3ujFCFgR2oz8bNjearaaZDTBgOyAeJ_gk9VgygFtgN5gi7LwJK3p4OraKikmkyy4NzadY0s3mQMAQfXW0BmBAHnS06AqQv70jwhB6gnK_lkNQe1LF2UfYcLvMAgBTxPYcAxoTY6GHduGJsG5fuqleQTnNDjYmE');"></div>
-<div class="absolute inset-0 bg-gradient-to-t from-background-dark to-transparent"></div>
-<div class="absolute bottom-6 left-6 flex items-center gap-3">
-<span class="text-3xl">🎮</span>
-<h4 class="text-xl font-bold text-slate-100">Gaming</h4>
-</div>
-</div>
-<div class="relative h-64 rounded-2xl overflow-hidden group border border-white/10">
-<div class="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-110" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuD7wgz3CoGnGs7uLlJ2IMdMoF5ub5fDtDZNxhOEmkJpFGYT2Gry6veo8JT4G7w38fvMbG3-mE9hCSNFMmuG06dzqH7YtdRQBX2jDrN8RC30uR9bxgo7QhLdJ_OX9Y-nqI5Wr7_nuk6QRSj_zqU_c-nMVCXmHojJXmrVlQJ4KEjm8tE78FVuC7kQ2yiwIZOzqio5uMA4y3hE5utWbVq6_BkUBHHuCnQIpj0GwO6rJ_oxr6hyEphdjUzqYDEyMeWc75QZ3ll6Zu620Go');"></div>
-<div class="absolute inset-0 bg-gradient-to-t from-background-dark to-transparent"></div>
-<div class="absolute bottom-6 left-6 flex items-center gap-3">
-<span class="text-3xl">💻</span>
-<h4 class="text-xl font-bold text-slate-100">Coding</h4>
-</div>
-</div>
-<div class="relative h-64 rounded-2xl overflow-hidden group border border-white/10">
-<div class="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-110" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAENTKr4TX_6Qkm7-mnqrviKo2cNcBr1L1-bmQ3cvR1Arf00Tpp_OuSqwzLTcGf3ZOTV8QLyamHP9_sEALaNUaEkz2HZOR0M4umvsbham1JnFyJ8c1BSnv7-LQoM3ZnkC4JhhX4szE3tLTEOw8med9bJg0jFhUd3UrcbCq_iDNUpAUEqWGHRPccrI48Wpjh3YPZk1KqhghTgkwv2Z5s1aRQypuZrPjbUlbvMywUzHQoX2DRZiLJzwZAIuK-CE1esz1Q0NbRCtp_plw');"></div>
-<div class="absolute inset-0 bg-gradient-to-t from-background-dark to-transparent"></div>
-<div class="absolute bottom-6 left-6 flex items-center gap-3">
-<span class="text-3xl">🏋️</span>
-<h4 class="text-xl font-bold text-slate-100">Gym/Fitness</h4>
-</div>
-</div>
-</div>
-</section>
-<section class="glass-panel rounded-[2rem] p-12 md:p-20 shadow-2xl text-center transform transition-transform hover:scale-[1.01] duration-500" id="contact">
-<h2 class="text-4xl md:text-5xl font-black mb-8 text-slate-100">Let's build something <span class="text-primary">Legendary</span>.</h2>
-<p class="text-slate-400 max-w-xl mx-auto mb-10">Open for collaborations, coffee chats, or just a quick competitive match.</p>
-<div class="flex flex-col md:flex-row items-center justify-center gap-6">
-<a class="flex items-center gap-3 bg-white/5 border border-white/10 px-8 py-4 rounded-xl hover:bg-primary hover:text-background-dark transition-all group backdrop-blur-md" href="mailto:ayushrahate32@gmail.com">
-<span class="material-symbols-outlined text-primary group-hover:text-background-dark">mail</span>
-<span class="font-bold">ayushrahate32@gmail.com</span>
-</a>
-<a class="flex items-center gap-3 bg-white/5 border border-white/10 px-8 py-4 rounded-xl hover:bg-primary hover:text-background-dark transition-all group backdrop-blur-md" href="https://www.linkedin.com/in/ayush-rahate-4802ab32b/">
-<span class="material-symbols-outlined text-primary group-hover:text-background-dark">person_add</span>
-<span class="font-bold">LinkedIn</span>
-</a>
-</div>
-</section>
-</div>
-</main>
-<footer class="relative z-10 border-t border-white/10 bg-background-dark/60 backdrop-blur-2xl py-12">
-<div class="max-w-7xl mx-auto px-6 md:px-20 flex flex-col md:flex-row items-center justify-between gap-6">
-<div class="flex items-center gap-3">
-<span class="material-symbols-outlined text-secondary">verified</span>
-<p class="text-slate-500 text-sm">© 2026 Ayush Rahate</p>
-</div>
-<p class="text-slate-400 font-medium italic">"Built with code, caffeine, and consistency"</p>
-<div class="flex gap-4">
-<a class="size-10 rounded-full border border-white/10 flex items-center justify-center hover:bg-white/10 transition-colors" href="#">
-<span class="material-symbols-outlined text-slate-400 text-sm">share</span>
-</a>
-<a class="size-10 rounded-full border border-white/10 flex items-center justify-center hover:bg-white/10 transition-colors" href="#">
-<span class="material-symbols-outlined text-slate-400 text-sm">code</span>
-</a>
-</div>
-</div>
-</footer>
-</div>
+  <!-- ===================== HERO ===================== -->
+  <section class="hero section" id="hero">
+    <div class="container">
+      <div class="hero__grid">
+        <div>
+          <div class="hero__badge reveal">
+            <span class="hero__badge-dot"></span>
+            Available for projects
+          </div>
+          <h1 class="hero__name reveal stagger-1">AYUSH<br>RAHATE</h1>
+          <p class="hero__tagline reveal stagger-2">"Code. Lift. Game. Repeat."</p>
+          <p class="hero__desc reveal stagger-3">
+            Computer Engineering student at <span class="highlight">DJ Sanghvi College of Engineering</span> with a Minor in Data Science.
+            Building robust software while chasing personal records in the gym and high scores in the lobby.
+          </p>
+          <div class="hero__buttons reveal stagger-4">
+            <a href="#projects" class="btn-primary">
+              <span class="material-symbols-outlined" style="font-size:1.1rem">rocket_launch</span>
+              View Projects
+            </a>
+            <a href="AYUSH_RESUME.pdf" download class="btn-outline">
+              <span class="material-symbols-outlined" style="font-size:1.1rem">download</span>
+              Download CV
+            </a>
+          </div>
+          <div class="hero__socials reveal stagger-5">
+            <a href="https://github.com/AyuRahate" target="_blank" aria-label="GitHub">
+              <span class="material-symbols-outlined">code</span>
+            </a>
+            <a href="https://www.linkedin.com/in/ayush-rahate-4802ab32b/" target="_blank" aria-label="LinkedIn">
+              <span class="material-symbols-outlined">person</span>
+            </a>
+            <a href="mailto:ayushrahate32@gmail.com" aria-label="Email">
+              <span class="material-symbols-outlined">mail</span>
+            </a>
+          </div>
+        </div>
 
-</body></html>
+        <!-- Terminal Card -->
+        <div class="hero__terminal reveal-right stagger-3">
+          <div class="hero__terminal-header">
+            <span class="hero__terminal-dot hero__terminal-dot--red"></span>
+            <span class="hero__terminal-dot hero__terminal-dot--yellow"></span>
+            <span class="hero__terminal-dot hero__terminal-dot--green"></span>
+            <span class="hero__terminal-title">ayush@portfolio ~</span>
+          </div>
+          <div class="hero__terminal-body">
+            <div><span class="comment">// profile.json</span></div>
+            <div>{</div>
+            <div>&nbsp;&nbsp;<span class="key">"name"</span>: <span class="val">"Ayush Rahate"</span>,</div>
+            <div>&nbsp;&nbsp;<span class="key">"role"</span>: <span class="val">"CS Engineer"</span>,</div>
+            <div>&nbsp;&nbsp;<span class="key">"minor"</span>: <span class="val">"Data Science"</span>,</div>
+            <div>&nbsp;&nbsp;<span class="key">"college"</span>: <span class="val">"DJ Sanghvi"</span>,</div>
+            <div>&nbsp;&nbsp;<span class="key">"passions"</span>: [<span class="val">"code"</span>, <span class="val">"gym"</span>, <span class="val">"gaming"</span>],</div>
+            <div>&nbsp;&nbsp;<span class="key">"caffeineLevel"</span>: <span class="val">"∞"</span></div>
+            <div>}</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 
-<script src="script.js"></script>
+  <!-- ===================== ABOUT ===================== -->
+  <section class="section" id="about">
+    <div class="container">
+      <div class="about__grid">
+        <div class="about__text">
+          <span class="section-label reveal">
+            <span class="material-symbols-outlined" style="font-size:1rem">person</span>
+            About Me
+          </span>
+          <h2 class="section-title reveal stagger-1">Discipline in the gym,<br><span class="text-secondary">Logic</span> in the code.</h2>
+          <p class="reveal stagger-2">
+            I'm a Computer Engineering student passionate about building efficient, scalable software. With a minor in Data Science, I bridge the gap between raw data and real-world applications.
+          </p>
+          <p class="reveal stagger-3">
+            When I'm not coding, you'll find me pushing limits at the gym or competing in gaming lobbies. I bring the same intensity and consistency to everything I do — whether it's debugging a complex algorithm or hitting a new deadlift PR.
+          </p>
+
+          <div class="about__stats reveal stagger-4">
+            <div class="about__stat">
+              <div class="about__stat-number" data-count="5">0</div>
+              <div class="about__stat-label">Projects Built</div>
+            </div>
+            <div class="about__stat">
+              <div class="about__stat-number" data-count="8">0</div>
+              <div class="about__stat-label">Technologies</div>
+            </div>
+            <div class="about__stat">
+              <div class="about__stat-number" data-count="500">0</div>
+              <div class="about__stat-label">GitHub Commits</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="about__interests reveal-right stagger-3">
+          <div class="about__interest">
+            <span class="about__interest-icon">💻</span>
+            <div class="about__interest-text">
+              <h4>Software Development</h4>
+              <p>Building scalable applications & systems</p>
+            </div>
+          </div>
+          <div class="about__interest">
+            <span class="about__interest-icon">🤖</span>
+            <div class="about__interest-text">
+              <h4>AI & Data Science</h4>
+              <p>ML models, data pipelines & analytics</p>
+            </div>
+          </div>
+          <div class="about__interest">
+            <span class="about__interest-icon">🏋️</span>
+            <div class="about__interest-text">
+              <h4>Fitness & Gym</h4>
+              <p>Progressive overload & discipline</p>
+            </div>
+          </div>
+          <div class="about__interest">
+            <span class="about__interest-icon">🎮</span>
+            <div class="about__interest-text">
+              <h4>Gaming</h4>
+              <p>Competitive lobbies & strategy</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== PROJECTS ===================== -->
+  <section class="section" id="projects">
+    <div class="container">
+      <div style="text-align:center; margin-bottom:3rem;">
+        <span class="section-label reveal">
+          <span class="material-symbols-outlined" style="font-size:1rem">folder_special</span>
+          Projects
+        </span>
+        <h2 class="section-title reveal stagger-1">Things I've <span class="text-gradient">Built</span></h2>
+        <p class="text-muted reveal stagger-2" style="max-width:560px;margin:0 auto;">A selection of projects that showcase my skills in software engineering, AI, and full-stack development.</p>
+      </div>
+
+      <div class="projects__grid">
+
+        <!-- Project 1 -->
+        <div class="project-card reveal stagger-1" data-project="0">
+          <div class="project-card__image" style="background:linear-gradient(135deg, rgba(var(--primary-rgb),0.2), rgba(var(--secondary-rgb),0.2)); display:flex; align-items:center; justify-content:center;">
+            <span class="material-symbols-outlined" style="font-size:4rem; color:var(--primary); opacity:0.6;">monitor_heart</span>
+          </div>
+          <div class="project-card__body">
+            <div class="project-card__tags">
+              <span class="project-card__tag">Python</span>
+              <span class="project-card__tag">CNN</span>
+              <span class="project-card__tag">MFCC</span>
+              <span class="project-card__tag">AI</span>
+            </div>
+            <h3 class="project-card__title">Baby Monitoring System</h3>
+            <p class="project-card__desc">AI-based system using MFCC feature extraction and CNN to detect infant cries and monitor posture in real-time.</p>
+            <div class="project-card__footer">
+              <span class="project-card__link">View Details <span class="material-symbols-outlined" style="font-size:1rem">arrow_forward</span></span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Project 2 -->
+        <div class="project-card reveal stagger-2" data-project="1">
+          <div class="project-card__image" style="background:linear-gradient(135deg, rgba(var(--secondary-rgb),0.2), rgba(var(--primary-rgb),0.15)); display:flex; align-items:center; justify-content:center;">
+            <span class="material-symbols-outlined" style="font-size:4rem; color:var(--secondary); opacity:0.6;">web</span>
+          </div>
+          <div class="project-card__body">
+            <div class="project-card__tags">
+              <span class="project-card__tag">HTML</span>
+              <span class="project-card__tag">CSS</span>
+              <span class="project-card__tag">JavaScript</span>
+            </div>
+            <h3 class="project-card__title">Portfolio Website</h3>
+            <p class="project-card__desc">Personal portfolio with modern UI, smooth animations, dark/light mode toggle, and responsive design across all devices.</p>
+            <div class="project-card__footer">
+              <span class="project-card__link">View Details <span class="material-symbols-outlined" style="font-size:1rem">arrow_forward</span></span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Project 3 -->
+        <div class="project-card reveal stagger-3" data-project="2">
+          <div class="project-card__image" style="background:linear-gradient(135deg, rgba(var(--primary-rgb),0.15), rgba(138,43,226,0.2)); display:flex; align-items:center; justify-content:center;">
+            <span class="material-symbols-outlined" style="font-size:4rem; color:var(--primary); opacity:0.6;">database</span>
+          </div>
+          <div class="project-card__body">
+            <div class="project-card__tags">
+              <span class="project-card__tag">Python</span>
+              <span class="project-card__tag">Pandas</span>
+              <span class="project-card__tag">ML</span>
+            </div>
+            <h3 class="project-card__title">Data Science Pipeline</h3>
+            <p class="project-card__desc">End-to-end data processing pipeline with automated cleaning, feature engineering, and predictive model training.</p>
+            <div class="project-card__footer">
+              <span class="project-card__link">View Details <span class="material-symbols-outlined" style="font-size:1rem">arrow_forward</span></span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Project 4 -->
+        <div class="project-card reveal stagger-4" data-project="3">
+          <div class="project-card__image" style="background:linear-gradient(135deg, rgba(var(--secondary-rgb),0.15), rgba(var(--primary-rgb),0.2)); display:flex; align-items:center; justify-content:center;">
+            <span class="material-symbols-outlined" style="font-size:4rem; color:var(--secondary); opacity:0.6;">smart_toy</span>
+          </div>
+          <div class="project-card__body">
+            <div class="project-card__tags">
+              <span class="project-card__tag">Java</span>
+              <span class="project-card__tag">OOP</span>
+              <span class="project-card__tag">Algorithms</span>
+            </div>
+            <h3 class="project-card__title">Algorithm Visualizer</h3>
+            <p class="project-card__desc">Interactive tool to visualize sorting, searching, and graph algorithms with step-by-step execution and complexity analysis.</p>
+            <div class="project-card__footer">
+              <span class="project-card__link">View Details <span class="material-symbols-outlined" style="font-size:1rem">arrow_forward</span></span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== SKILLS ===================== -->
+  <section class="section" id="skills">
+    <div class="container">
+      <div style="text-align:center; margin-bottom:3rem;">
+        <span class="section-label reveal">
+          <span class="material-symbols-outlined" style="font-size:1rem">code</span>
+          Skills
+        </span>
+        <h2 class="section-title reveal stagger-1">My <span class="text-gradient">Core Stack</span></h2>
+      </div>
+
+      <div class="skills__categories">
+
+        <!-- Programming -->
+        <div class="skill-category reveal stagger-1">
+          <div class="skill-category__header">
+            <div class="skill-category__icon">
+              <span class="material-symbols-outlined">terminal</span>
+            </div>
+            <h3 class="skill-category__title">Programming Languages</h3>
+          </div>
+          <div class="skill-item">
+            <div class="skill-item__header">
+              <span class="skill-item__name">Java</span>
+              <span class="skill-item__level">Advanced</span>
+            </div>
+            <div class="skill-item__bar"><div class="skill-item__fill" data-width="85"></div></div>
+          </div>
+          <div class="skill-item">
+            <div class="skill-item__header">
+              <span class="skill-item__name">Python</span>
+              <span class="skill-item__level">Advanced</span>
+            </div>
+            <div class="skill-item__bar"><div class="skill-item__fill" data-width="80"></div></div>
+          </div>
+          <div class="skill-item">
+            <div class="skill-item__header">
+              <span class="skill-item__name">C Language</span>
+              <span class="skill-item__level">Intermediate</span>
+            </div>
+            <div class="skill-item__bar"><div class="skill-item__fill" data-width="70"></div></div>
+          </div>
+          <div class="skill-item">
+            <div class="skill-item__header">
+              <span class="skill-item__name">JavaScript</span>
+              <span class="skill-item__level">Intermediate</span>
+            </div>
+            <div class="skill-item__bar"><div class="skill-item__fill" data-width="65"></div></div>
+          </div>
+        </div>
+
+        <!-- Tools & Frameworks -->
+        <div class="skill-category reveal stagger-2">
+          <div class="skill-category__header">
+            <div class="skill-category__icon">
+              <span class="material-symbols-outlined">handyman</span>
+            </div>
+            <h3 class="skill-category__title">Tools & Frameworks</h3>
+          </div>
+          <div class="skill-item">
+            <div class="skill-item__header">
+              <span class="skill-item__name">Git & GitHub</span>
+              <span class="skill-item__level">Advanced</span>
+            </div>
+            <div class="skill-item__bar"><div class="skill-item__fill" data-width="85"></div></div>
+          </div>
+          <div class="skill-item">
+            <div class="skill-item__header">
+              <span class="skill-item__name">VS Code / IntelliJ</span>
+              <span class="skill-item__level">Advanced</span>
+            </div>
+            <div class="skill-item__bar"><div class="skill-item__fill" data-width="90"></div></div>
+          </div>
+          <div class="skill-item">
+            <div class="skill-item__header">
+              <span class="skill-item__name">Linux / CLI</span>
+              <span class="skill-item__level">Intermediate</span>
+            </div>
+            <div class="skill-item__bar"><div class="skill-item__fill" data-width="65"></div></div>
+          </div>
+          <div class="skill-item">
+            <div class="skill-item__header">
+              <span class="skill-item__name">Docker</span>
+              <span class="skill-item__level">Beginner</span>
+            </div>
+            <div class="skill-item__bar"><div class="skill-item__fill" data-width="40"></div></div>
+          </div>
+        </div>
+
+        <!-- Technologies -->
+        <div class="skill-category reveal stagger-3">
+          <div class="skill-category__header">
+            <div class="skill-category__icon">
+              <span class="material-symbols-outlined">memory</span>
+            </div>
+            <h3 class="skill-category__title">Technologies & AI/ML</h3>
+          </div>
+          <div class="skill-item">
+            <div class="skill-item__header">
+              <span class="skill-item__name">Machine Learning</span>
+              <span class="skill-item__level">Intermediate</span>
+            </div>
+            <div class="skill-item__bar"><div class="skill-item__fill" data-width="70"></div></div>
+          </div>
+          <div class="skill-item">
+            <div class="skill-item__header">
+              <span class="skill-item__name">CNN / Deep Learning</span>
+              <span class="skill-item__level">Intermediate</span>
+            </div>
+            <div class="skill-item__bar"><div class="skill-item__fill" data-width="60"></div></div>
+          </div>
+          <div class="skill-item">
+            <div class="skill-item__header">
+              <span class="skill-item__name">SQL / Databases</span>
+              <span class="skill-item__level">Intermediate</span>
+            </div>
+            <div class="skill-item__bar"><div class="skill-item__fill" data-width="70"></div></div>
+          </div>
+          <div class="skill-item">
+            <div class="skill-item__header">
+              <span class="skill-item__name">HTML/CSS/Tailwind</span>
+              <span class="skill-item__level">Intermediate</span>
+            </div>
+            <div class="skill-item__bar"><div class="skill-item__fill" data-width="65"></div></div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== EXPERIENCE / EDUCATION ===================== -->
+  <section class="section" id="experience">
+    <div class="container">
+      <div style="text-align:center;margin-bottom:3rem;">
+        <span class="section-label reveal">
+          <span class="material-symbols-outlined" style="font-size:1rem">school</span>
+          Journey
+        </span>
+        <h2 class="section-title reveal stagger-1">Education & <span class="text-gradient">Experience</span></h2>
+      </div>
+
+      <div style="max-width:700px;margin:0 auto;">
+        <div class="timeline">
+
+          <div class="timeline-item reveal stagger-1">
+            <div class="timeline-dot"></div>
+            <div class="timeline-item__date">2023 — Present</div>
+            <div class="timeline-item__title">B.Tech in Computer Engineering</div>
+            <div class="timeline-item__org">DJ Sanghvi College of Engineering, Mumbai</div>
+            <div class="timeline-item__desc">Minor in Data Science. Focused on algorithms, data structures, AI/ML, and full-stack development. Active participant in hackathons and coding competitions.</div>
+          </div>
+
+          <div class="timeline-item reveal stagger-2">
+            <div class="timeline-dot"></div>
+            <div class="timeline-item__date">2024</div>
+            <div class="timeline-item__title">AI/ML Project Lead</div>
+            <div class="timeline-item__org">Baby Monitoring System — Academic Project</div>
+            <div class="timeline-item__desc">Led the development of a CNN-based infant cry detection system using MFCC features. Handled data preprocessing, model training, and real-time posture analysis.</div>
+          </div>
+
+          <div class="timeline-item reveal stagger-3">
+            <div class="timeline-dot"></div>
+            <div class="timeline-item__date">2021 — 2023</div>
+            <div class="timeline-item__title">Higher Secondary Education</div>
+            <div class="timeline-item__org">Science Stream — PCM with CS</div>
+            <div class="timeline-item__desc">Built a strong foundation in mathematics, physics, and computer science. First introduction to competitive programming and software development.</div>
+          </div>
+
+          <div class="timeline-item reveal stagger-4">
+            <div class="timeline-dot"></div>
+            <div class="timeline-item__date">Ongoing</div>
+            <div class="timeline-item__title">Self-Taught Developer</div>
+            <div class="timeline-item__org">Open Source & Personal Projects</div>
+            <div class="timeline-item__desc">Continuously learning new technologies through personal projects, open-source contributions, and online courses. Building, breaking, and rebuilding — that's the loop.</div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== CONTACT ===================== -->
+  <section class="section" id="contact">
+    <div class="container">
+      <div style="text-align:center;margin-bottom:3rem;">
+        <span class="section-label reveal">
+          <span class="material-symbols-outlined" style="font-size:1rem">connect_without_contact</span>
+          Contact
+        </span>
+        <h2 class="section-title reveal stagger-1">Let's build something <span class="text-primary">Legendary</span>.</h2>
+        <p class="text-muted reveal stagger-2" style="max-width:500px;margin:0 auto;">Open for collaborations, internships, freelance projects, or just a quick competitive match.</p>
+      </div>
+
+      <div class="contact__grid reveal stagger-3">
+        <form class="contact__form" id="contactForm">
+          <div class="form-group">
+            <label for="contactName">Your Name</label>
+            <input type="text" id="contactName" placeholder="John Doe" required />
+          </div>
+          <div class="form-group">
+            <label for="contactEmail">Your Email</label>
+            <input type="email" id="contactEmail" placeholder="john@example.com" required />
+          </div>
+          <div class="form-group">
+            <label for="contactMessage">Message</label>
+            <textarea id="contactMessage" placeholder="Tell me about your project or idea..." required></textarea>
+          </div>
+          <button type="submit" class="btn-primary" style="align-self:flex-start">
+            <span class="material-symbols-outlined" style="font-size:1.1rem">send</span>
+            Send Message
+          </button>
+        </form>
+
+        <div class="contact__info">
+          <a class="contact__item" href="mailto:ayushrahate32@gmail.com">
+            <div class="contact__item-icon">
+              <span class="material-symbols-outlined">mail</span>
+            </div>
+            <div class="contact__item-text">
+              <h4>Email</h4>
+              <p>ayushrahate32@gmail.com</p>
+            </div>
+          </a>
+          <a class="contact__item" href="https://www.linkedin.com/in/ayush-rahate-4802ab32b/" target="_blank">
+            <div class="contact__item-icon">
+              <span class="material-symbols-outlined">person_add</span>
+            </div>
+            <div class="contact__item-text">
+              <h4>LinkedIn</h4>
+              <p>linkedin.com/in/ayush-rahate</p>
+            </div>
+          </a>
+          <a class="contact__item" href="https://github.com/AyuRahate" target="_blank">
+            <div class="contact__item-icon">
+              <span class="material-symbols-outlined">code</span>
+            </div>
+            <div class="contact__item-text">
+              <h4>GitHub</h4>
+              <p>github.com/AyuRahate</p>
+            </div>
+          </a>
+          <div class="contact__item">
+            <div class="contact__item-icon">
+              <span class="material-symbols-outlined">location_on</span>
+            </div>
+            <div class="contact__item-text">
+              <h4>Location</h4>
+              <p>Mumbai, India</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== FOOTER ===================== -->
+  <footer class="footer">
+    <div class="container footer__inner">
+      <p class="footer__copy">© 2026 Ayush Rahate. All rights reserved.</p>
+      <p class="footer__quote">"Built with code, caffeine, and consistency."</p>
+      <div class="footer__socials">
+        <a href="https://github.com/AyuRahate" target="_blank" aria-label="GitHub">
+          <span class="material-symbols-outlined">code</span>
+        </a>
+        <a href="https://www.linkedin.com/in/ayush-rahate-4802ab32b/" target="_blank" aria-label="LinkedIn">
+          <span class="material-symbols-outlined">person</span>
+        </a>
+        <a href="mailto:ayushrahate32@gmail.com" aria-label="Email">
+          <span class="material-symbols-outlined">mail</span>
+        </a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ===================== PROJECT MODAL ===================== -->
+  <div class="modal-overlay" id="projectModal">
+    <div class="modal">
+      <button class="modal__close" id="modalClose">
+        <span class="material-symbols-outlined">close</span>
+      </button>
+      <div class="modal__image" id="modalImage" style="background:linear-gradient(135deg, rgba(var(--primary-rgb),0.2), rgba(var(--secondary-rgb),0.2)); display:flex; align-items:center; justify-content:center;">
+        <span class="material-symbols-outlined" id="modalIcon" style="font-size:4rem; color:var(--primary); opacity:0.5;">code</span>
+      </div>
+      <div class="modal__body">
+        <div class="modal__tags" id="modalTags"></div>
+        <h3 class="modal__title" id="modalTitle"></h3>
+        <p class="modal__desc" id="modalDesc"></p>
+        <div class="modal__features">
+          <h4>Key Features</h4>
+          <ul id="modalFeatures"></ul>
+        </div>
+        <div class="modal__actions" id="modalActions"></div>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
