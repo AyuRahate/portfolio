@@ -19,6 +19,7 @@ import {
   Sparkles,
 } from "lucide-react";
 import { personalData } from "@/data/personal";
+import MatrixBackground from "@/components/MatrixBackground";
 
 const ROLES = [
   "Computer Engineer",
@@ -33,6 +34,22 @@ export function Hero() {
 
   const [currentRoleIndex, setCurrentRoleIndex] = useState(0);
   const [mumbaiTime, setMumbaiTime] = useState<string>("");
+  const [isReady, setIsReady] = useState(false);
+
+  // Sync entrance animations with preloader completion
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    if (
+      document.documentElement.dataset.loaded === "true" ||
+      sessionStorage.getItem("preloader-seen")
+    ) {
+      setIsReady(true);
+      return;
+    }
+    const onDone = () => setIsReady(true);
+    window.addEventListener("preloader:done", onDone, { once: true });
+    return () => window.removeEventListener("preloader:done", onDone);
+  }, []);
 
   // Scroll animation for transition into grid section below
   const { scrollYProgress } = useScroll({
@@ -117,14 +134,16 @@ export function Hero() {
     <section
       ref={heroRef}
       id="home"
-      className="relative min-h-[96vh] flex flex-col justify-between pt-28 sm:pt-36 lg:pt-40 pb-4 sm:pb-6 px-4 sm:px-6 lg:px-8 overflow-hidden bg-[var(--background)] transition-colors"
+      className="relative min-h-[96vh] flex flex-col justify-between pt-20 sm:pt-24 lg:pt-24 pb-4 sm:pb-6 px-4 sm:px-6 lg:px-8 overflow-hidden isolate bg-[var(--background)] transition-colors"
     >
+      {/* ── MATRIX RAIN BACKGROUND (hero only, z-0, pauses off-screen) ── */}
+      <MatrixBackground density={0.58} />
       {/* ── TOP META STRIP (Clean editorial spacing below fixed navbar) ── */}
       <motion.div
         initial={{ opacity: 0, y: -10 }}
-        animate={{ opacity: 1, y: 0 }}
+        animate={isReady ? { opacity: 1, y: 0 } : { opacity: 0, y: -10 }}
         transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-        className="max-w-7xl mx-auto w-full z-10 pt-2 pb-6 border-b border-[var(--surface-border)] flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2.5 text-[11px] font-mono tracking-[0.12em] uppercase text-[var(--muted-foreground)]"
+        className="max-w-7xl mx-auto w-full z-10 pt-1 pb-4 sm:pb-5 border-b border-[var(--surface-border)] flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2.5 text-[11px] font-mono tracking-[0.12em] uppercase text-[var(--muted-foreground)]"
       >
         <div className="flex items-center gap-2">
           <span className="w-1.5 h-1.5 rounded-full bg-[var(--accent)]" />
@@ -142,11 +161,11 @@ export function Hero() {
       </motion.div>
 
       {/* ── MAIN HERO GRID ── */}
-      <div className="max-w-7xl mx-auto w-full grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center my-auto py-8 sm:py-12 z-10">
+      <div className="max-w-7xl mx-auto w-full grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center my-auto py-6 sm:py-8 lg:py-10 z-10">
         {/* Left Column: Typography, Dynamic Role & CTAs */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
+          animate={isReady ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
           transition={{ duration: 0.7, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
           className="lg:col-span-7 flex flex-col items-start"
         >
@@ -261,7 +280,7 @@ export function Hero() {
         {/* Right Column: Editorial Portrait Cutout */}
         <motion.div
           initial={{ opacity: 0, y: 24 }}
-          animate={{ opacity: 1, y: 0 }}
+          animate={isReady ? { opacity: 1, y: 0 } : { opacity: 0, y: 24 }}
           transition={{ duration: 0.8, delay: 0.25, ease: [0.16, 1, 0.3, 1] }}
           className="lg:col-span-5 relative flex justify-center items-end"
         >

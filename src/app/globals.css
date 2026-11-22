@@ -23,8 +23,8 @@
   --name-grad-top: rgba(212, 163, 89, 0.25);
   --name-grad-mid: rgba(212, 163, 89, 0.12);
   --name-grad-bottom: rgba(212, 163, 89, 0.01);
-  --name-stroke: rgba(212, 163, 89, 0.18);
-  --name-spotlight: rgba(224, 180, 110, 0.45);
+  --name-stroke: rgba(212, 163, 89, 0.28);
+  --name-spotlight: rgba(255, 225, 160, 0.95);
 
   /* About Section & Typography Tokens (Dark) */
   --text-strong: #F4F0E8;
@@ -58,8 +58,8 @@
   --name-grad-top: rgba(158, 108, 40, 0.24);
   --name-grad-mid: rgba(40, 36, 32, 0.14);
   --name-grad-bottom: rgba(40, 36, 32, 0.02);
-  --name-stroke: rgba(158, 108, 40, 0.18);
-  --name-spotlight: rgba(158, 108, 40, 0.38);
+  --name-stroke: rgba(28, 25, 23, 0.30);
+  --name-spotlight: rgba(20, 14, 8, 0.80);
 
   /* About Section & Typography Tokens (Light) */
   --text-strong: #1f1a16;
@@ -210,7 +210,7 @@ body {
   color: transparent;
   -webkit-text-fill-color: transparent;
   background-image:
-    radial-gradient(circle 320px at var(--mx, 50%) var(--my, 50%), var(--name-spotlight), transparent 75%),
+    radial-gradient(circle 240px at var(--mx, 50%) var(--my, 50%), var(--name-spotlight), transparent 70%),
     url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.10'/%3E%3C/svg%3E"),
     linear-gradient(to bottom, var(--name-grad-top) 0%, var(--name-grad-mid) 42%, var(--name-grad-bottom) 100%);
   background-size: 100% 100%, 180px 180px, 100% 100%;
@@ -255,4 +255,359 @@ body {
   .about-card:hover {
     transform: none !important;
   }
+}
+
+/* ── Rope bulb theme toggle ────────────────────────────────────────────── */
+
+.rope-bulb-wrapper {
+  position: fixed;
+  top: 0;
+  right: clamp(16px, 3.5vw, 48px);
+  z-index: 55;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+  transition: transform 0.55s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.4s ease;
+  transform-origin: top center;
+  animation: rope-sway 5s ease-in-out infinite;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+/* Visible state: hanging down from ceiling */
+.rope-bulb--visible {
+  transform: translateY(0);
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* Hidden state: slides up off-screen */
+.rope-bulb--hidden {
+  transform: translateY(-110%);
+  opacity: 0;
+  pointer-events: none;
+  animation: none;
+}
+
+/* Pull / click animation: rope swings harder */
+.rope-bulb--pulling {
+  animation: rope-pull 0.65s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+}
+
+/* Light-mode wrapper: subtle shadow on the floor below */
+.rope-bulb--light .rope-bulb-svg {
+  filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.12));
+}
+
+/* Dark-mode wrapper: warm amber glow radiates out */
+.rope-bulb--dark .rope-bulb-svg {
+  filter: drop-shadow(0 4px 20px rgba(255, 160, 40, 0.45)) drop-shadow(0 0 40px rgba(255, 120, 20, 0.22));
+}
+
+.rope-bulb-svg {
+  display: block;
+  transition: filter 0.4s ease;
+}
+
+/* Pull hint label */
+.rope-bulb-hint {
+  font-family: var(--font-jetbrains-mono, ui-monospace, monospace);
+  font-size: 9px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--muted-foreground);
+  opacity: 0;
+  margin-top: 2px;
+  transition: opacity 0.2s ease;
+}
+
+.rope-bulb-wrapper:hover .rope-bulb-hint,
+.rope-bulb-wrapper:focus-visible .rope-bulb-hint {
+  opacity: 1;
+}
+
+/* Idle gentle sway */
+@keyframes rope-sway {
+
+  0%,
+  100% {
+    transform: rotate(-1.5deg) translateX(0);
+  }
+
+  25% {
+    transform: rotate(0.5deg) translateX(1px);
+  }
+
+  50% {
+    transform: rotate(1.5deg) translateX(2px);
+  }
+
+  75% {
+    transform: rotate(0deg) translateX(1px);
+  }
+}
+
+/* Click / pull: sharp swing then settle */
+@keyframes rope-pull {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  15% {
+    transform: rotate(-14deg) scaleY(1.04);
+  }
+
+  35% {
+    transform: rotate(10deg) scaleY(0.97);
+  }
+
+  55% {
+    transform: rotate(-6deg) scaleY(1.01);
+  }
+
+  72% {
+    transform: rotate(4deg);
+  }
+
+  86% {
+    transform: rotate(-2deg);
+  }
+
+  100% {
+    transform: rotate(0deg);
+  }
+}
+
+/* Respect reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .rope-bulb-wrapper {
+    animation: none;
+    transition: opacity 0.2s ease;
+  }
+
+  .rope-bulb--pulling {
+    animation: none;
+  }
+}
+
+/* ── Matrix rain background (hero only) ───────────────────────────────── */
+
+/* Ensure the hero creates its own stacking context so z-index is local */
+#home {
+  isolation: isolate;
+}
+
+.matrix-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  /* gold accent as r,g,b triplet — dark mode (#D4A359) */
+  --matrix-rgb: 212, 163, 89;
+  opacity: 0.42;
+  /* fade transparent at top and bottom so there's no hard seam */
+  mask-image: linear-gradient(to bottom, transparent 0%, #000 16%, #000 62%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0%, #000 16%, #000 62%, transparent 100%);
+}
+
+.matrix-bg canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+/* Soft radial scrim on the left/center so text column stays crisp */
+.matrix-bg::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse 60% 75% at 30% 50%, var(--background) 0%, transparent 72%);
+  opacity: 0.80;
+  pointer-events: none;
+}
+
+/* Light theme: darker gold, matches dark-mode presence */
+[data-theme="light"] .matrix-bg {
+  --matrix-rgb: 140, 95, 30;
+  opacity: 0.42;
+}
+
+/* ── Cinematic Preloader ────────────────────────────────────────────── */
+.preloader {
+  --pre-bg: #0f0e0d;
+  --pre-fg: #f4efe6;
+  --accent: #d4a55a;
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: grid;
+  place-items: center;
+  background: var(--pre-bg);
+  color: var(--pre-fg);
+  clip-path: inset(0);
+  transition: clip-path 0.9s cubic-bezier(0.76, 0, 0.24, 1);
+}
+.preloader.is-exit {
+  clip-path: inset(0 0 100% 0);
+}
+
+.pre-glow {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse 45% 40% at 50% 50%, rgba(212, 165, 90, 0.18), transparent 70%);
+  animation: pre-pulse 3s ease-in-out infinite;
+}
+@keyframes pre-pulse {
+  50% {
+    opacity: 0.55;
+    transform: scale(1.08);
+  }
+}
+
+.pre-word {
+  position: relative;
+  display: inline-flex;
+  align-items: baseline;
+  font-family: var(--font-jetbrains-mono), "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-weight: 600;
+  font-size: clamp(2.6rem, 9vw, 6.5rem);
+  letter-spacing: -0.04em;
+  line-height: 1;
+}
+
+/* letters: base state is the final state, so transitions below still work */
+.pl {
+  display: inline-block;
+  transition: color 0.6s ease, max-width 0.7s cubic-bezier(0.7, 0, 0.2, 1),
+              opacity 0.4s ease, filter 0.5s ease, transform 0.7s cubic-bezier(0.7, 0, 0.2, 1);
+  animation: pl-in 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) backwards;
+  animation-delay: calc(var(--i) * 70ms + 150ms);
+}
+@keyframes pl-in {
+  from {
+    opacity: 0;
+    transform: translateY(45%);
+    filter: blur(10px);
+  }
+}
+.pl-first {
+  color: var(--accent);
+}
+.is-morph .pl,
+.is-exit .pl {
+  color: var(--accent);
+}
+
+/* "a" collapses so Loading closes up into Coding */
+.pl-a {
+  max-width: 1ch;
+  overflow: hidden;
+}
+.is-morph .pl-a,
+.is-exit .pl-a {
+  max-width: 0;
+  opacity: 0;
+  filter: blur(10px);
+  transform: translateY(-30%) scale(0.6);
+}
+
+/* dots while loading, cursor after the morph */
+.pre-dots {
+  display: inline-flex;
+  max-width: 3ch;
+  overflow: hidden;
+  color: var(--accent);
+  transition: max-width 0.5s ease, opacity 0.3s ease;
+}
+.pre-dots i {
+  font-style: normal;
+  animation: pre-dot 1.2s infinite;
+}
+.pre-dots i:nth-child(2) {
+  animation-delay: 0.2s;
+}
+.pre-dots i:nth-child(3) {
+  animation-delay: 0.4s;
+}
+@keyframes pre-dot {
+  0%, 100% {
+    opacity: 0.2;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+.is-morph .pre-dots,
+.is-exit .pre-dots {
+  max-width: 0;
+  opacity: 0;
+}
+
+.pre-cursor {
+  align-self: center;
+  width: 0.09em;
+  height: 0.8em;
+  margin-left: 0.12em;
+  background: var(--accent);
+  opacity: 0;
+}
+.is-morph .pre-cursor,
+.is-exit .pre-cursor {
+  opacity: 1;
+  animation: pre-blink 0.9s steps(1) infinite;
+}
+@keyframes pre-blink {
+  50% {
+    opacity: 0;
+  }
+}
+
+.pre-meta {
+  position: absolute;
+  left: clamp(20px, 5vw, 64px);
+  right: clamp(20px, 5vw, 64px);
+  bottom: clamp(24px, 6vh, 56px);
+  display: flex;
+  justify-content: space-between;
+  font-family: var(--font-jetbrains-mono), "JetBrains Mono", ui-monospace, monospace;
+  font-size: 12px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  opacity: 0.7;
+  transition: opacity 0.4s ease;
+}
+.is-morph .pre-meta,
+.is-exit .pre-meta {
+  opacity: 0;
+}
+
+.pre-bar {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: 2px;
+  width: calc(var(--pct) * 1%);
+  background: var(--accent);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pl {
+    animation: none;
+  }
+  .pl-a,
+  .pre-dots {
+    transition: none;
+  }
+  .pre-glow {
+    animation: none;
+  }
+  .preloader {
+    transition-duration: 0.3s;
+  }
+}
+
+/* Instant-hide on repeat visits where session flag was already set */
+html[data-loaded="true"] .preloader {
+  display: none !important;
 }

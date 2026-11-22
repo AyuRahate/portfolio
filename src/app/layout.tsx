@@ -4,6 +4,8 @@ import "./globals.css";
 import { ThemeProvider } from "@/components/layout/ThemeProvider";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
+import { RopeBulb } from "@/components/RopeBulb";
+import Preloader from "@/components/Preloader";
 import { personalData } from "@/data/personal";
 
 const inter = Inter({
@@ -99,14 +101,21 @@ export default function RootLayout({
     <html lang="en" data-theme="dark" suppressHydrationWarning className={`${inter.variable} ${jetbrainsMono.variable}`}>
       <head>
         <script
+          dangerouslySetInnerHTML={{
+            __html: `try{if(sessionStorage.getItem('preloader-seen')){document.documentElement.dataset.loaded='true';}}catch(e){}`,
+          }}
+        />
+        <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
       </head>
       <body className="min-h-screen bg-[var(--background)] text-[var(--foreground)] antialiased transition-colors selection:bg-indigo-500/30 selection:text-white">
         <ThemeProvider>
+          <Preloader />
           <div className="relative flex min-h-screen flex-col bg-grid-pattern">
             <Navbar />
+            <RopeBulb />
             <div className="flex-1">{children}</div>
             <Footer />
           </div>

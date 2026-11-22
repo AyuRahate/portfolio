@@ -3,7 +3,6 @@
 import React, { useState, useEffect, useMemo, useRef, useCallback } from "react";
 import Link from "next/link";
 import { ArrowUpRight, ChevronDown, Menu, X } from "lucide-react";
-import { ThemeToggle } from "./ThemeToggle";
 
 type NavState = "top" | "hidden" | "revealed";
 
@@ -140,8 +139,8 @@ export function Navbar() {
         aria-label="Open navigation"
         aria-expanded={!isHidden}
         className={`fixed top-2.5 left-1/2 -translate-x-1/2 z-50 flex items-center justify-center rounded-full shadow-sm transition-all duration-300 group focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:outline-none ${isHidden
-            ? "w-12 h-1.5 sm:w-14 sm:h-2 bg-[var(--accent)]/60 hover:bg-[var(--accent)] hover:w-20 hover:h-6 opacity-100 pointer-events-auto"
-            : "w-0 h-0 opacity-0 pointer-events-none"
+          ? "w-12 h-1.5 sm:w-14 sm:h-2 bg-[var(--accent)]/60 hover:bg-[var(--accent)] hover:w-20 hover:h-6 opacity-100 pointer-events-auto"
+          : "w-0 h-0 opacity-0 pointer-events-none"
           }`}
       >
         <span className="hidden group-hover:inline-flex group-focus:inline-flex items-center gap-1 text-[9px] font-mono tracking-widest text-[var(--accent-foreground)] font-bold uppercase select-none">
@@ -158,10 +157,10 @@ export function Navbar() {
         onMouseLeave={hideNavOnLeave}
         onBlur={handleBlur}
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ease-out motion-reduce:transform-none motion-reduce:transition-opacity ${isHidden
-            ? "-translate-y-[120%] opacity-0 pointer-events-none"
-            : "translate-y-0 opacity-100 pointer-events-auto"
+          ? "-translate-y-[120%] opacity-0 pointer-events-none"
+          : "translate-y-0 opacity-100 pointer-events-auto"
           } ${isTop
-            ? "py-5 sm:py-6 bg-transparent"
+            ? "py-4 sm:py-5 bg-transparent"
             : "py-3 bg-[var(--background)]/85 backdrop-blur-md border-b border-[var(--surface-border)] shadow-sm"
           }`}
       >
@@ -193,8 +192,8 @@ export function Navbar() {
                   href={item.href}
                   tabIndex={isHidden ? -1 : 0}
                   className={`relative px-3.5 py-1 text-xs tracking-[0.06em] font-medium rounded-full transition-all ${isActive
-                      ? "text-[var(--foreground)] font-semibold"
-                      : "text-[var(--muted-foreground)] hover:text-[var(--foreground)]"
+                    ? "text-[var(--foreground)] font-semibold"
+                    : "text-[var(--muted-foreground)] hover:text-[var(--foreground)]"
                     }`}
                 >
                   {isActive && (
@@ -206,12 +205,8 @@ export function Navbar() {
             })}
           </nav>
 
-          {/* Actions: Theme Toggle & "Let's talk" */}
+          {/* Actions: "Let's talk" */}
           <div className="flex items-center gap-2 sm:gap-3">
-            <div tabIndex={isHidden ? -1 : 0}>
-              <ThemeToggle />
-            </div>
-
             <Link
               href="/#contact"
               tabIndex={isHidden ? -1 : 0}
@@ -249,8 +244,8 @@ export function Navbar() {
                       if (window.scrollY >= 80) setNavState("hidden");
                     }}
                     className={`px-3 py-2 text-sm font-medium rounded-lg transition-colors flex items-center justify-between ${isActive
-                        ? "bg-[var(--surface-elevated)] text-[var(--accent)] font-semibold"
-                        : "text-[var(--muted-foreground)] hover:text-[var(--foreground)] hover:bg-[var(--surface-elevated)]"
+                      ? "bg-[var(--surface-elevated)] text-[var(--accent)] font-semibold"
+                      : "text-[var(--muted-foreground)] hover:text-[var(--foreground)] hover:bg-[var(--surface-elevated)]"
                       }`}
                   >
                     <span className="tracking-wide">{item.label}</span>
