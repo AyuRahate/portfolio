@@ -50,6 +50,7 @@ html {
   html {
     scroll-behavior: auto;
   }
+
   *,
   *::before,
   *::after {
@@ -74,9 +75,13 @@ body {
   outline-offset: 2px;
 }
 
-/* Subtle editorial backdrop */
+/* Subtle editorial background grid pattern */
 .bg-grid-pattern {
   background-color: var(--background);
+  background-size: 48px 48px;
+  background-image:
+    linear-gradient(to right, var(--surface-border) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--surface-border) 1px, transparent 1px);
 }
 
 /* Glassmorphism card utilities */
@@ -146,5 +151,3 @@ body {
 [data-theme="light"] .hero-photo-img {
   filter: drop-shadow(0 12px 24px var(--shadow)) contrast(1.02);
 }
-
-

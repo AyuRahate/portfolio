@@ -44,9 +44,8 @@ export function Navbar() {
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        scrolled ? "py-3" : "py-5 sm:py-6"
-      }`}
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${scrolled ? "py-3" : "py-5 sm:py-6"
+        }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 flex items-center justify-between">
         {/* Brand / Logo */}
@@ -73,11 +72,10 @@ export function Navbar() {
               <Link
                 key={item.id}
                 href={item.href}
-                className={`relative px-3.5 py-1 text-xs tracking-[0.06em] font-medium rounded-full transition-all ${
-                  isActive
+                className={`relative px-3.5 py-1 text-xs tracking-[0.06em] font-medium rounded-full transition-all ${isActive
                     ? "text-[var(--foreground)] font-semibold"
                     : "text-[var(--muted-foreground)] hover:text-[var(--foreground)]"
-                }`}
+                  }`}
               >
                 {isActive && (
                   <span className="absolute inset-0 bg-[var(--surface-elevated)] border border-[var(--surface-border)] rounded-full -z-10 shadow-sm" />
@@ -122,11 +120,10 @@ export function Navbar() {
                   key={item.id}
                   href={item.href}
                   onClick={() => setMobileMenuOpen(false)}
-                  className={`px-3 py-2 text-sm font-medium rounded-lg transition-colors flex items-center justify-between ${
-                    isActive
+                  className={`px-3 py-2 text-sm font-medium rounded-lg transition-colors flex items-center justify-between ${isActive
                       ? "bg-[var(--surface-elevated)] text-[var(--accent)] font-semibold"
                       : "text-[var(--muted-foreground)] hover:text-[var(--foreground)] hover:bg-[var(--surface-elevated)]"
-                  }`}
+                    }`}
                 >
                   <span className="tracking-wide">{item.label}</span>
                   {isActive && (
