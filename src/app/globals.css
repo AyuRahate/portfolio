@@ -3,37 +3,37 @@
 @tailwind utilities;
 
 :root {
-  --background: #09090b;
-  --foreground: #f5f5f7;
-  --surface: #111115;
-  --surface-elevated: #18181d;
-  --surface-border: rgba(255, 255, 255, 0.08);
-  --surface-border-hover: rgba(255, 255, 255, 0.18);
-  --muted: #1c1c24;
-  --muted-foreground: #a1a1aa;
-  --accent: #6366f1;
-  --accent-foreground: #ffffff;
-  --accent-glow: rgba(99, 102, 241, 0.25);
-  --accent-secondary: #8b5cf6;
-  --portrait-glow: radial-gradient(circle at 50% 50%, rgba(99, 102, 241, 0.12) 0%, rgba(139, 92, 246, 0.05) 45%, transparent 70%);
-  --portrait-filter: drop-shadow(0 14px 32px rgba(0, 0, 0, 0.4)) contrast(1.02);
+  --background: #121110;
+  --foreground: #F4F0E8;
+  --surface: #1A1918;
+  --surface-elevated: #242220;
+  --surface-border: rgba(244, 240, 232, 0.08);
+  --surface-border-hover: rgba(244, 240, 232, 0.18);
+  --muted: #201E1C;
+  --muted-foreground: #A39E96;
+  --accent: #D4A359;
+  --accent-foreground: #121110;
+  --accent-glow: rgba(212, 163, 89, 0.22);
+  --accent-secondary: #E0B46E;
+  --glow: rgba(212, 163, 89, 0.28);
+  --shadow: rgba(0, 0, 0, 0.65);
 }
 
 [data-theme="light"] {
-  --background: #fafafa;
-  --foreground: #09090b;
-  --surface: #ffffff;
-  --surface-elevated: #f4f4f5;
-  --surface-border: rgba(0, 0, 0, 0.08);
-  --surface-border-hover: rgba(0, 0, 0, 0.16);
-  --muted: #e4e4e7;
-  --muted-foreground: #71717a;
-  --accent: #4f46e5;
-  --accent-foreground: #ffffff;
-  --accent-glow: rgba(79, 70, 229, 0.15);
-  --accent-secondary: #7c3aed;
-  --portrait-glow: radial-gradient(circle at 50% 50%, rgba(168, 85, 247, 0.07) 0%, rgba(99, 102, 241, 0.03) 50%, transparent 75%);
-  --portrait-filter: drop-shadow(0 12px 24px rgba(0, 0, 0, 0.1)) brightness(1.02) contrast(0.98);
+  --background: #F1E9DF;
+  --foreground: #1C1917;
+  --surface: #FAF6F0;
+  --surface-elevated: #E8E0D4;
+  --surface-border: rgba(28, 25, 23, 0.08);
+  --surface-border-hover: rgba(28, 25, 23, 0.18);
+  --muted: #E5DDD0;
+  --muted-foreground: #78716C;
+  --accent: #9E6C28;
+  --accent-foreground: #FFFFFF;
+  --accent-glow: rgba(158, 108, 40, 0.16);
+  --accent-secondary: #B88235;
+  --glow: rgba(158, 108, 40, 0.18);
+  --shadow: rgba(28, 25, 23, 0.12);
 }
 
 * {
@@ -74,11 +74,9 @@ body {
   outline-offset: 2px;
 }
 
-/* Subtle background grid pattern */
+/* Subtle editorial backdrop */
 .bg-grid-pattern {
-  background-size: 40px 40px;
-  background-image: linear-gradient(to right, var(--surface-border) 1px, transparent 1px),
-                    linear-gradient(to bottom, var(--surface-border) 1px, transparent 1px);
+  background-color: var(--background);
 }
 
 /* Glassmorphism card utilities */
@@ -95,23 +93,58 @@ body {
 
 /* Custom selection */
 ::selection {
-  background-color: rgba(99, 102, 241, 0.3);
-  color: #ffffff;
+  background-color: var(--accent);
+  color: var(--accent-foreground);
 }
 
-/* Portrait mask strictly applied to the portrait element alone */
-.portrait-mask {
-  mask-image: linear-gradient(to bottom, black 82%, transparent 100%);
-  -webkit-mask-image: linear-gradient(to bottom, black 82%, transparent 100%);
+/* Hero profile photo styling & theme-aware glow */
+.hero-photo-wrapper {
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  width: 100%;
 }
 
-.portrait-glow-layer {
-  background: var(--portrait-glow);
-  transition: background 0.3s ease;
+/* Theme-aware glow behind the photo using ::before with generous spread */
+.hero-photo-wrapper::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: calc(100% + 120px);
+  height: calc(100% + 120px);
+  max-width: 480px;
+  max-height: 480px;
+  border-radius: 50%;
+  background: radial-gradient(circle, var(--glow) 0%, transparent 70%);
+  filter: blur(60px);
+  z-index: 0;
+  pointer-events: none;
 }
 
-.portrait-image-styled {
-  filter: var(--portrait-filter);
+/* Transparent cutout image styling */
+.hero-photo-img {
+  position: relative;
+  z-index: 1;
+  display: block;
+  width: auto;
+  height: auto;
+  max-height: 520px;
+  object-fit: contain;
+  pointer-events: none;
+  user-select: none;
+  /* Smooth bottom fade without any hard container edge */
+  mask-image: linear-gradient(to bottom, #000 76%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to bottom, #000 76%, transparent 100%);
+  /* Theme-aware drop shadow + subtle warm rim light in dark mode */
+  filter: drop-shadow(0 18px 30px var(--shadow)) drop-shadow(0 0 1px rgba(212, 163, 89, 0.35)) contrast(1.02);
   transition: filter 0.3s ease;
 }
+
+[data-theme="light"] .hero-photo-img {
+  filter: drop-shadow(0 12px 24px var(--shadow)) contrast(1.02);
+}
+
 
