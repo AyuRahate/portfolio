@@ -30,6 +30,7 @@ const ROLES = [
 export function Hero() {
   const heroRef = useRef<HTMLElement>(null);
   const nameRef = useRef<HTMLHeadingElement>(null);
+  const photoClipRef = useRef<HTMLDivElement>(null);
   const rafId = useRef<number | null>(null);
 
   const [currentRoleIndex, setCurrentRoleIndex] = useState(0);
@@ -49,6 +50,35 @@ export function Hero() {
     const onDone = () => setIsReady(true);
     window.addEventListener("preloader:done", onDone, { once: true });
     return () => window.removeEventListener("preloader:done", onDone);
+  }, []);
+
+  // Dynamic clipping boundary for the hero photo:
+  // Clip frame bottom stops 14px above the top of the name row so photo never covers letters or meta text.
+  // Photo scrolls naturally at normal 1x page speed with zero counter-translation.
+  useEffect(() => {
+    const heroEl = heroRef.current;
+    const nameEl = nameRef.current;
+    const clipEl = photoClipRef.current;
+    if (!heroEl || !clipEl || !nameEl) return;
+
+    const computeBounds = () => {
+      const nameRect = nameEl.getBoundingClientRect();
+      const clipRect = clipEl.getBoundingClientRect();
+
+      const nameTopInDoc = nameRect.top + window.scrollY;
+      const clipTopInDoc = clipRect.top + window.scrollY;
+      const maxH = Math.max(180, nameTopInDoc - clipTopInDoc - 14);
+      clipEl.style.maxHeight = `${maxH}px`;
+    };
+
+    computeBounds();
+    const timer = setTimeout(computeBounds, 250);
+    window.addEventListener("resize", computeBounds, { passive: true });
+
+    return () => {
+      clearTimeout(timer);
+      window.removeEventListener("resize", computeBounds);
+    };
   }, []);
 
   // Scroll animation for transition into grid section below
@@ -161,13 +191,13 @@ export function Hero() {
       </motion.div>
 
       {/* ── MAIN HERO GRID ── */}
-      <div className="max-w-7xl mx-auto w-full grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center my-auto py-6 sm:py-8 lg:py-10 z-10">
+      <div className="max-w-7xl mx-auto w-full grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start my-auto py-6 sm:py-8 lg:py-10 z-10">
         {/* Left Column: Typography, Dynamic Role & CTAs */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={isReady ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
           transition={{ duration: 0.7, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
-          className="lg:col-span-7 flex flex-col items-start"
+          className="lg:col-span-7 flex flex-col items-start relative z-30"
         >
           {/* Small Category Label & Synced Counter */}
           <div className="flex flex-wrap items-center gap-3 mb-6">
@@ -277,31 +307,40 @@ export function Hero() {
           </div>
         </motion.div>
 
-        {/* Right Column: Editorial Portrait Cutout */}
+        {/* Right Column: Editorial Portrait Cutout with Unclipped Glow & Frame Clipping */}
         <motion.div
           initial={{ opacity: 0, y: 24 }}
           animate={isReady ? { opacity: 1, y: 0 } : { opacity: 0, y: 24 }}
           transition={{ duration: 0.8, delay: 0.25, ease: [0.16, 1, 0.3, 1] }}
-          className="lg:col-span-5 relative flex justify-center items-end"
+          className="lg:col-span-5 relative z-20 flex justify-center items-start lg:pt-1"
         >
-          <div className="hero-photo-wrapper">
-            <Image
-              src={personalData.portraitImage || "/images/ayush-portrait.webp"}
-              alt="Ayush Rahate — Portrait"
-              width={442}
-              height={826}
-              priority
-              className="hero-photo-img"
-              sizes="(max-width: 640px) 280px, (max-width: 1024px) 340px, 400px"
-            />
+          {/* Unclipped circular ambient glow with generous negative spread */}
+          <div className="hero-photo-glow" aria-hidden="true" />
+
+          {/* Photo clipping frame: strictly bounded above the name row, clips photo at bottom */}
+          <div
+            ref={photoClipRef}
+            className="hero-photo-clip-frame"
+          >
+            <div className="relative w-full flex justify-center items-start">
+              <Image
+                src={personalData.portraitImage || "/images/ayush-portrait.webp"}
+                alt="Ayush Rahate — Portrait"
+                width={442}
+                height={826}
+                priority
+                className="hero-photo-img"
+                sizes="(max-width: 640px) 240px, (max-width: 1024px) 300px, 360px"
+              />
+            </div>
           </div>
         </motion.div>
       </div>
 
       {/* ── DEDICATED META ROW (Cleanly separated above giant display name) ── */}
-      <div className="max-w-7xl mx-auto w-full z-10 pt-4 pb-3 flex items-center justify-between text-[11px] font-mono tracking-[0.14em] uppercase text-[var(--muted-foreground)]">
+      <div className="max-w-7xl mx-auto w-full z-30 relative pt-4 pb-3 flex items-center justify-between text-[11px] font-mono tracking-[0.14em] uppercase text-[var(--muted-foreground)]">
         <span>B.Tech in Computer Engineering · 2028</span>
-        <span className="hidden sm:inline-flex items-center gap-1.5 opacity-80">
+        <span className="hidden sm:inline-flex items-center gap-1.5 opacity-80 text-right">
           <span>Scroll to explore</span>
           <span className="animate-bounce inline-block">↓</span>
         </span>
@@ -311,7 +350,7 @@ export function Hero() {
       <motion.div
         style={{ y: nameY, scale: nameScale, opacity: nameOpacity }}
         aria-hidden="true"
-        className="w-full select-none pointer-events-none z-0 relative overflow-visible mt-2 sm:mt-4"
+        className="w-full select-none pointer-events-none z-10 relative overflow-visible mt-2 sm:mt-4"
       >
         <div className="hero-display-name-container px-4 sm:px-6">
           <h2 ref={nameRef} className="hero-display-name">

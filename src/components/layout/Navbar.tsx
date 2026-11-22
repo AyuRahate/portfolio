@@ -3,6 +3,7 @@
 import React, { useState, useEffect, useMemo, useRef, useCallback } from "react";
 import Link from "next/link";
 import { ArrowUpRight, ChevronDown, Menu, X } from "lucide-react";
+import { ThemeToggle } from "./ThemeToggle";
 
 type NavState = "top" | "hidden" | "revealed";
 
@@ -205,8 +206,12 @@ export function Navbar() {
             })}
           </nav>
 
-          {/* Actions: "Let's talk" */}
+          {/* Actions: Theme Toggle & "Let's talk" */}
           <div className="flex items-center gap-2 sm:gap-3">
+            <div tabIndex={isHidden ? -1 : 0}>
+              <ThemeToggle />
+            </div>
+
             <Link
               href="/#contact"
               tabIndex={isHidden ? -1 : 0}

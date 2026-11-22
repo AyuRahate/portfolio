@@ -4,7 +4,6 @@ import "./globals.css";
 import { ThemeProvider } from "@/components/layout/ThemeProvider";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
-import { RopeBulb } from "@/components/RopeBulb";
 import Preloader from "@/components/Preloader";
 import { personalData } from "@/data/personal";
 
@@ -115,7 +114,6 @@ export default function RootLayout({
           <Preloader />
           <div className="relative flex min-h-screen flex-col bg-grid-pattern">
             <Navbar />
-            <RopeBulb />
             <div className="flex-1">{children}</div>
             <Footer />
           </div>
