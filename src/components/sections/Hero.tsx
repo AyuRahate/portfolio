@@ -1,9 +1,14 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { motion, AnimatePresence } from "framer-motion";
+import {
+  motion,
+  AnimatePresence,
+  useScroll,
+  useTransform,
+} from "framer-motion";
 import {
   ArrowDown,
   ArrowUpRight,
@@ -22,8 +27,19 @@ const ROLES = [
 ];
 
 export function Hero() {
+  const heroRef = useRef<HTMLElement>(null);
   const [currentRoleIndex, setCurrentRoleIndex] = useState(0);
   const [mumbaiTime, setMumbaiTime] = useState<string>("");
+
+  // Scroll animation for transition into grid section below
+  const { scrollYProgress } = useScroll({
+    target: heroRef,
+    offset: ["start start", "end start"],
+  });
+
+  const nameY = useTransform(scrollYProgress, [0, 1], ["0%", "28%"]);
+  const nameScale = useTransform(scrollYProgress, [0, 1], [1, 0.94]);
+  const nameOpacity = useTransform(scrollYProgress, [0, 0.65, 1], [1, 0.8, 0.15]);
 
   // Live clock for Mumbai, IN (GMT +5:30)
   useEffect(() => {
@@ -60,22 +76,10 @@ export function Hero() {
 
   return (
     <section
+      ref={heroRef}
       id="home"
-      className="relative min-h-[96vh] flex flex-col justify-between pt-24 sm:pt-28 pb-10 sm:pb-14 px-4 sm:px-6 lg:px-8 overflow-hidden bg-[var(--background)] transition-colors"
+      className="relative min-h-[96vh] flex flex-col justify-between pt-24 sm:pt-28 pb-4 sm:pb-6 px-4 sm:px-6 lg:px-8 overflow-hidden bg-[var(--background)] transition-colors"
     >
-      {/* ── HUGE EDITORIAL DISPLAY WORD BEHIND EVERYTHING ── */}
-      <div
-        aria-hidden="true"
-        className="absolute inset-x-0 bottom-0 pointer-events-none select-none z-0 overflow-hidden flex justify-center items-end"
-      >
-        <span
-          className="font-extrabold uppercase tracking-tighter text-[var(--foreground)] opacity-[0.06] text-[15vw] sm:text-[14vw] lg:text-[13.5vw] leading-[0.8] whitespace-nowrap translate-y-[8%]"
-          style={{ letterSpacing: "-0.04em" }}
-        >
-          AYUSH RAHATE
-        </span>
-      </div>
-
       {/* ── TOP META STRIP ── */}
       <motion.div
         initial={{ opacity: 0, y: -10 }}
@@ -150,7 +154,7 @@ export function Hero() {
           </p>
 
           {/* CTAs */}
-          <div className="flex flex-wrap items-center gap-3 w-full sm:w-auto mb-9">
+          <div className="flex flex-wrap items-center gap-3 w-full sm:w-auto mb-8 sm:mb-9">
             {/* Primary: Start a project */}
             <Link
               href="#contact"
@@ -180,8 +184,8 @@ export function Hero() {
             </a>
           </div>
 
-          {/* Social Row */}
-          <div className="flex items-center gap-3 pt-2">
+          {/* Social Row with dedicated spacing */}
+          <div className="flex items-center gap-3 pt-1 mb-2">
             <span className="text-[11px] font-mono tracking-[0.12em] uppercase text-[var(--muted-foreground)] mr-1">
               Connect:
             </span>
@@ -236,11 +240,60 @@ export function Hero() {
         </motion.div>
       </div>
 
-      {/* ── BOTTOM ANCHOR SCROLL HINT ── */}
-      <div className="max-w-7xl mx-auto w-full z-10 pt-4 flex items-center justify-between text-[11px] font-mono tracking-[0.14em] uppercase text-[var(--muted-foreground)] opacity-70">
+      {/* ── DEDICATED META ROW (Cleanly separated above giant display name) ── */}
+      <div className="max-w-7xl mx-auto w-full z-10 pt-4 pb-3 flex items-center justify-between text-[11px] font-mono tracking-[0.14em] uppercase text-[var(--muted-foreground)]">
         <span>B.Tech in Computer Engineering · 2028</span>
-        <span className="hidden sm:inline">Scroll to explore</span>
+        <span className="hidden sm:inline-flex items-center gap-1.5 opacity-80">
+          <span>Scroll to explore</span>
+          <span className="animate-bounce inline-block">↓</span>
+        </span>
       </div>
+
+      {/* ── GIANT FLUID SVG DISPLAY NAME WITH SCROLL ANIMATION & SOFT BLEND ── */}
+      <motion.div
+        style={{ y: nameY, scale: nameScale, opacity: nameOpacity }}
+        aria-hidden="true"
+        className="w-full select-none pointer-events-none z-0 relative overflow-visible mt-1 sm:mt-2"
+      >
+        <div
+          className="w-full flex justify-center items-center px-4 sm:px-6"
+          style={{
+            maskImage:
+              "linear-gradient(to bottom, #000 68%, transparent 98%)",
+            WebkitMaskImage:
+              "linear-gradient(to bottom, #000 68%, transparent 98%)",
+          }}
+        >
+          <svg
+            viewBox="0 0 1200 135"
+            className="w-full h-auto max-w-7xl mx-auto select-none pointer-events-none"
+            preserveAspectRatio="xMidYMid meet"
+          >
+            <text
+              x="50%"
+              y="58%"
+              textAnchor="middle"
+              dominantBaseline="middle"
+              fill="var(--hero-name-color)"
+              style={{
+                fontSize: "102px",
+                fontWeight: 900,
+                fontFamily: "var(--font-inter), system-ui, sans-serif",
+                letterSpacing: "-0.04em",
+                textTransform: "uppercase",
+              }}
+            >
+              AYUSH RAHATE
+            </text>
+          </svg>
+        </div>
+      </motion.div>
+
+      {/* ── SMOOTH GRADIENT BLEND INTO GRID SECTION BELOW ── */}
+      <div
+        aria-hidden="true"
+        className="absolute inset-x-0 bottom-0 h-16 sm:h-20 bg-gradient-to-b from-transparent via-[var(--background)]/40 to-[var(--background)] pointer-events-none z-0"
+      />
     </section>
   );
 }
