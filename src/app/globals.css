@@ -18,6 +18,13 @@
   --glow: rgba(212, 163, 89, 0.28);
   --shadow: rgba(0, 0, 0, 0.65);
   --hero-name-color: rgba(244, 240, 232, 0.08);
+
+  /* Textured Hero Name Tokens (Dark: Warm gold on warm charcoal) */
+  --name-grad-top: rgba(212, 163, 89, 0.25);
+  --name-grad-mid: rgba(212, 163, 89, 0.12);
+  --name-grad-bottom: rgba(212, 163, 89, 0.01);
+  --name-stroke: rgba(212, 163, 89, 0.18);
+  --name-spotlight: rgba(224, 180, 110, 0.45);
 }
 
 [data-theme="light"] {
@@ -36,6 +43,13 @@
   --glow: rgba(158, 108, 40, 0.18);
   --shadow: rgba(28, 25, 23, 0.12);
   --hero-name-color: rgba(28, 25, 23, 0.08);
+
+  /* Textured Hero Name Tokens (Light: Warm darker tone on cream) */
+  --name-grad-top: rgba(158, 108, 40, 0.24);
+  --name-grad-mid: rgba(40, 36, 32, 0.14);
+  --name-grad-bottom: rgba(40, 36, 32, 0.02);
+  --name-stroke: rgba(158, 108, 40, 0.18);
+  --name-spotlight: rgba(158, 108, 40, 0.38);
 }
 
 * {
@@ -152,4 +166,49 @@ body {
 
 [data-theme="light"] .hero-photo-img {
   filter: drop-shadow(0 12px 24px var(--shadow)) contrast(1.02);
+}
+
+/* Textured Giant Display Name */
+.hero-display-name-container {
+  position: relative;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: visible;
+}
+
+.hero-display-name {
+  font-family: var(--font-inter), system-ui, -apple-system, sans-serif;
+  font-weight: 900;
+  letter-spacing: -0.04em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  font-size: clamp(2.4rem, 11vw, 11.2rem);
+  line-height: 0.95;
+  text-align: center;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+  background-image:
+    radial-gradient(circle 320px at var(--mx, 50%) var(--my, 50%), var(--name-spotlight), transparent 75%),
+    url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.10'/%3E%3C/svg%3E"),
+    linear-gradient(to bottom, var(--name-grad-top) 0%, var(--name-grad-mid) 42%, var(--name-grad-bottom) 100%);
+  background-size: 100% 100%, 180px 180px, 100% 100%;
+  background-repeat: no-repeat, repeat, no-repeat;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-stroke: 1px var(--name-stroke);
+  mask-image: linear-gradient(to bottom, #000 40%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to bottom, #000 40%, transparent 100%);
+  user-select: none;
+  pointer-events: none;
+  display: block;
+  width: 100%;
+  max-width: 100%;
+}
+
+@media (prefers-reduced-motion: reduce), (hover: none) {
+  .hero-display-name {
+    --name-spotlight: transparent !important;
+  }
 }

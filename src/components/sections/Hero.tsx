@@ -28,6 +28,9 @@ const ROLES = [
 
 export function Hero() {
   const heroRef = useRef<HTMLElement>(null);
+  const nameRef = useRef<HTMLHeadingElement>(null);
+  const rafId = useRef<number | null>(null);
+
   const [currentRoleIndex, setCurrentRoleIndex] = useState(0);
   const [mumbaiTime, setMumbaiTime] = useState<string>("");
 
@@ -40,6 +43,42 @@ export function Hero() {
   const nameY = useTransform(scrollYProgress, [0, 1], ["0%", "28%"]);
   const nameScale = useTransform(scrollYProgress, [0, 1], [1, 0.94]);
   const nameOpacity = useTransform(scrollYProgress, [0, 0.65, 1], [1, 0.8, 0.15]);
+
+  // Spotlight effect following cursor over the hero name
+  useEffect(() => {
+    const hero = heroRef.current;
+    const nameEl = nameRef.current;
+    if (!hero || !nameEl) return;
+
+    const isFinePointer = window.matchMedia(
+      "(hover: hover) and (pointer: fine)"
+    ).matches;
+    const prefersReduced = window.matchMedia(
+      "(prefers-reduced-motion: reduce)"
+    ).matches;
+    if (!isFinePointer || prefersReduced) return;
+
+    const handlePointerMove = (e: PointerEvent) => {
+      if (rafId.current !== null) {
+        cancelAnimationFrame(rafId.current);
+      }
+      rafId.current = requestAnimationFrame(() => {
+        const rect = nameEl.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        nameEl.style.setProperty("--mx", `${x}px`);
+        nameEl.style.setProperty("--my", `${y}px`);
+      });
+    };
+
+    hero.addEventListener("pointermove", handlePointerMove, { passive: true });
+    return () => {
+      hero.removeEventListener("pointermove", handlePointerMove);
+      if (rafId.current !== null) {
+        cancelAnimationFrame(rafId.current);
+      }
+    };
+  }, []);
 
   // Live clock for Mumbai, IN (GMT +5:30)
   useEffect(() => {
@@ -78,9 +117,9 @@ export function Hero() {
     <section
       ref={heroRef}
       id="home"
-      className="relative min-h-[96vh] flex flex-col justify-between pt-24 sm:pt-28 pb-4 sm:pb-6 px-4 sm:px-6 lg:px-8 overflow-hidden bg-[var(--background)] transition-colors"
+      className="relative min-h-[96vh] flex flex-col justify-between pt-28 sm:pt-36 lg:pt-40 pb-4 sm:pb-6 px-4 sm:px-6 lg:px-8 overflow-hidden bg-[var(--background)] transition-colors"
     >
-      {/* ── TOP META STRIP ── */}
+      {/* ── TOP META STRIP (Clean editorial spacing below fixed navbar) ── */}
       <motion.div
         initial={{ opacity: 0, y: -10 }}
         animate={{ opacity: 1, y: 0 }}
@@ -249,43 +288,16 @@ export function Hero() {
         </span>
       </div>
 
-      {/* ── GIANT FLUID SVG DISPLAY NAME WITH SCROLL ANIMATION & SOFT BLEND ── */}
+      {/* ── GIANT TEXTURED DISPLAY NAME WITH SCROLL ANIMATION & SOFT BLEND ── */}
       <motion.div
         style={{ y: nameY, scale: nameScale, opacity: nameOpacity }}
         aria-hidden="true"
-        className="w-full select-none pointer-events-none z-0 relative overflow-visible mt-1 sm:mt-2"
+        className="w-full select-none pointer-events-none z-0 relative overflow-visible mt-2 sm:mt-4"
       >
-        <div
-          className="w-full flex justify-center items-center px-4 sm:px-6"
-          style={{
-            maskImage:
-              "linear-gradient(to bottom, #000 68%, transparent 98%)",
-            WebkitMaskImage:
-              "linear-gradient(to bottom, #000 68%, transparent 98%)",
-          }}
-        >
-          <svg
-            viewBox="0 0 1200 135"
-            className="w-full h-auto max-w-7xl mx-auto select-none pointer-events-none"
-            preserveAspectRatio="xMidYMid meet"
-          >
-            <text
-              x="50%"
-              y="58%"
-              textAnchor="middle"
-              dominantBaseline="middle"
-              fill="var(--hero-name-color)"
-              style={{
-                fontSize: "102px",
-                fontWeight: 900,
-                fontFamily: "var(--font-inter), system-ui, sans-serif",
-                letterSpacing: "-0.04em",
-                textTransform: "uppercase",
-              }}
-            >
-              AYUSH RAHATE
-            </text>
-          </svg>
+        <div className="hero-display-name-container px-4 sm:px-6">
+          <h2 ref={nameRef} className="hero-display-name">
+            AYUSH RAHATE
+          </h2>
         </div>
       </motion.div>
 
