@@ -139,11 +139,10 @@ export function Navbar() {
         onFocus={revealNav}
         aria-label="Open navigation"
         aria-expanded={!isHidden}
-        className={`fixed top-2.5 left-1/2 -translate-x-1/2 z-50 flex items-center justify-center rounded-full shadow-sm transition-all duration-300 group focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:outline-none ${
-          isHidden
+        className={`fixed top-2.5 left-1/2 -translate-x-1/2 z-50 flex items-center justify-center rounded-full shadow-sm transition-all duration-300 group focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:outline-none ${isHidden
             ? "w-12 h-1.5 sm:w-14 sm:h-2 bg-[var(--accent)]/60 hover:bg-[var(--accent)] hover:w-20 hover:h-6 opacity-100 pointer-events-auto"
             : "w-0 h-0 opacity-0 pointer-events-none"
-        }`}
+          }`}
       >
         <span className="hidden group-hover:inline-flex group-focus:inline-flex items-center gap-1 text-[9px] font-mono tracking-widest text-[var(--accent-foreground)] font-bold uppercase select-none">
           <span>Menu</span>
@@ -158,15 +157,13 @@ export function Navbar() {
         tabIndex={-1}
         onMouseLeave={hideNavOnLeave}
         onBlur={handleBlur}
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ease-out motion-reduce:transform-none motion-reduce:transition-opacity ${
-          isHidden
+        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ease-out motion-reduce:transform-none motion-reduce:transition-opacity ${isHidden
             ? "-translate-y-[120%] opacity-0 pointer-events-none"
             : "translate-y-0 opacity-100 pointer-events-auto"
-        } ${
-          isTop
+          } ${isTop
             ? "py-5 sm:py-6 bg-transparent"
             : "py-3 bg-[var(--background)]/85 backdrop-blur-md border-b border-[var(--surface-border)] shadow-sm"
-        }`}
+          }`}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 flex items-center justify-between">
           {/* Brand / Logo */}
@@ -195,11 +192,10 @@ export function Navbar() {
                   key={item.id}
                   href={item.href}
                   tabIndex={isHidden ? -1 : 0}
-                  className={`relative px-3.5 py-1 text-xs tracking-[0.06em] font-medium rounded-full transition-all ${
-                    isActive
+                  className={`relative px-3.5 py-1 text-xs tracking-[0.06em] font-medium rounded-full transition-all ${isActive
                       ? "text-[var(--foreground)] font-semibold"
                       : "text-[var(--muted-foreground)] hover:text-[var(--foreground)]"
-                  }`}
+                    }`}
                 >
                   {isActive && (
                     <span className="absolute inset-0 bg-[var(--surface-elevated)] border border-[var(--surface-border)] rounded-full -z-10 shadow-sm" />
@@ -252,11 +248,10 @@ export function Navbar() {
                       setMobileMenuOpen(false);
                       if (window.scrollY >= 80) setNavState("hidden");
                     }}
-                    className={`px-3 py-2 text-sm font-medium rounded-lg transition-colors flex items-center justify-between ${
-                      isActive
+                    className={`px-3 py-2 text-sm font-medium rounded-lg transition-colors flex items-center justify-between ${isActive
                         ? "bg-[var(--surface-elevated)] text-[var(--accent)] font-semibold"
                         : "text-[var(--muted-foreground)] hover:text-[var(--foreground)] hover:bg-[var(--surface-elevated)]"
-                    }`}
+                      }`}
                   >
                     <span className="tracking-wide">{item.label}</span>
                     {isActive && (

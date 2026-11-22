@@ -69,10 +69,16 @@ export function Projects() {
               {/* Content Container */}
               <div className="p-6 flex-1 flex flex-col justify-between">
                 <div>
-                  <h3 className="text-xl font-bold text-[var(--foreground)] group-hover:text-[var(--accent)] transition-colors mb-2.5 flex items-center justify-between">
+                  <h3 className="text-xl font-bold text-[var(--foreground)] group-hover:text-[var(--accent)] transition-colors mb-1 flex items-center justify-between">
                     <span>{project.title}</span>
                     <ArrowUpRight className="w-4 h-4 opacity-0 group-hover:opacity-100 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all text-[var(--accent)]" />
                   </h3>
+
+                  {project.subtitle && (
+                    <p className="text-xs font-mono text-[var(--accent)] mb-3">
+                      {project.subtitle}
+                    </p>
+                  )}
 
                   <p className="text-sm text-[var(--muted-foreground)] leading-relaxed mb-6">
                     {project.description}
@@ -101,18 +107,32 @@ export function Projects() {
                     <ArrowRight className="w-3.5 h-3.5" />
                   </Link>
 
-                  {project.repositoryUrl && (
-                    <a
-                      href={project.repositoryUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      aria-label={`${project.title} GitHub repository`}
-                      className="inline-flex items-center gap-1 text-xs text-[var(--muted-foreground)] hover:text-[var(--foreground)] transition-colors font-mono"
-                    >
-                      <Github className="w-3.5 h-3.5" />
-                      <span>Code</span>
-                    </a>
-                  )}
+                  <div className="flex items-center gap-3">
+                    {project.demoUrl && (
+                      <a
+                        href={project.demoUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        aria-label={`${project.title} live demo`}
+                        className="inline-flex items-center gap-1 text-xs text-[var(--foreground)] hover:text-[var(--accent)] transition-colors font-mono font-medium"
+                      >
+                        <ArrowUpRight className="w-3.5 h-3.5" />
+                        <span>Live</span>
+                      </a>
+                    )}
+                    {project.repositoryUrl && (
+                      <a
+                        href={project.repositoryUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        aria-label={`${project.title} GitHub repository`}
+                        className="inline-flex items-center gap-1 text-xs text-[var(--muted-foreground)] hover:text-[var(--foreground)] transition-colors font-mono"
+                      >
+                        <Github className="w-3.5 h-3.5" />
+                        <span>Code</span>
+                      </a>
+                    )}
+                  </div>
                 </div>
               </div>
             </motion.div>

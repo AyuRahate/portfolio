@@ -227,7 +227,8 @@ body {
   max-width: 100%;
 }
 
-@media (prefers-reduced-motion: reduce), (hover: none) {
+@media (prefers-reduced-motion: reduce),
+(hover: none) {
   .hero-display-name {
     --name-spotlight: transparent !important;
   }
@@ -255,4 +256,3 @@ body {
     transform: none !important;
   }
 }
-

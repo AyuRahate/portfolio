@@ -68,9 +68,15 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
             {project.category}
           </div>
 
-          <h1 className="text-3xl sm:text-5xl font-extrabold tracking-tight text-[var(--foreground)] mb-5">
+          <h1 className="text-3xl sm:text-5xl font-extrabold tracking-tight text-[var(--foreground)] mb-2">
             {project.title}
           </h1>
+
+          {project.subtitle && (
+            <p className="text-sm sm:text-base font-mono text-[var(--accent)] mb-5">
+              {project.subtitle}
+            </p>
+          )}
 
           <p className="text-base sm:text-lg text-[var(--muted-foreground)] leading-relaxed mb-8">
             {project.description}
