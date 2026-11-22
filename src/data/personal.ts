@@ -6,6 +6,7 @@ export const personalData = {
   github: "https://github.com/AyuRahate",
   linkedin: "https://www.linkedin.com/in/ayush-rahate-4802ab32b/",
   profileImage: "/images/ayush.jpg",
+  portraitImage: "/images/ayush-portrait.webp",
   resumePath: "/resume/Ayush_Rahate_Resume.pdf",
   bioIntro:
     "I'm a Computer Engineering student who enjoys building practical software, exploring intelligent systems, and creating thoughtful digital experiences. I combine technical problem-solving with an interest in creativity and design.",
