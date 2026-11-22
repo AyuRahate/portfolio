@@ -110,29 +110,25 @@ export function Hero() {
 
         {/* Right Column: Transparent Portrait Integration */}
         <motion.div
-          initial={{ opacity: 0, y: 24 }}
+          initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
+          transition={{ duration: 0.7, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
           className="lg:col-span-5 relative flex justify-center items-end"
         >
-          {/* Subtle violet/blue radial glow behind portrait */}
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[280px] sm:w-[380px] lg:w-[440px] h-[280px] sm:h-[380px] lg:h-[440px] bg-gradient-to-tr from-indigo-600/25 via-violet-600/20 to-sky-500/10 rounded-full blur-3xl pointer-events-none -z-10" />
+          {/* Broad, soft ambient backdrop glow matched to theme */}
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[340px] sm:w-[440px] lg:w-[520px] h-[340px] sm:h-[440px] lg:h-[520px] portrait-glow-layer rounded-full pointer-events-none -z-10" />
 
-          {/* Portrait Container with Soft Bottom Fade */}
-          <div className="relative w-full max-w-[320px] sm:max-w-[380px] lg:max-w-[420px] flex justify-center items-end">
+          {/* Portrait Container with CSS mask on the portrait layer alone */}
+          <div className="relative w-full max-w-[290px] sm:max-w-[340px] lg:max-w-[380px] flex justify-center items-end portrait-mask">
             <Image
               src={personalData.portraitImage || "/images/ayush-portrait.webp"}
               alt="Ayush Rahate — Portrait"
               width={442}
               height={826}
               priority
-              quality={95}
-              className="w-auto h-auto max-h-[440px] sm:max-h-[500px] lg:max-h-[540px] object-contain drop-shadow-[0_20px_40px_rgba(0,0,0,0.45)] select-none pointer-events-none"
-              sizes="(max-width: 640px) 280px, (max-width: 1024px) 360px, 420px"
+              className="w-auto h-auto max-h-[410px] sm:max-h-[460px] lg:max-h-[490px] object-contain portrait-image-styled select-none pointer-events-none"
+              sizes="(max-width: 640px) 260px, (max-width: 1024px) 320px, 380px"
             />
-
-            {/* Soft bottom fade blending portrait naturally into background */}
-            <div className="absolute inset-x-0 bottom-0 h-20 sm:h-24 bg-gradient-to-t from-[var(--background)] via-[var(--background)]/75 to-transparent pointer-events-none" />
           </div>
         </motion.div>
       </div>

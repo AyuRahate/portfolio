@@ -15,6 +15,8 @@
   --accent-foreground: #ffffff;
   --accent-glow: rgba(99, 102, 241, 0.25);
   --accent-secondary: #8b5cf6;
+  --portrait-glow: radial-gradient(circle at 50% 50%, rgba(99, 102, 241, 0.12) 0%, rgba(139, 92, 246, 0.05) 45%, transparent 70%);
+  --portrait-filter: drop-shadow(0 14px 32px rgba(0, 0, 0, 0.4)) contrast(1.02);
 }
 
 [data-theme="light"] {
@@ -30,6 +32,8 @@
   --accent-foreground: #ffffff;
   --accent-glow: rgba(79, 70, 229, 0.15);
   --accent-secondary: #7c3aed;
+  --portrait-glow: radial-gradient(circle at 50% 50%, rgba(168, 85, 247, 0.07) 0%, rgba(99, 102, 241, 0.03) 50%, transparent 75%);
+  --portrait-filter: drop-shadow(0 12px 24px rgba(0, 0, 0, 0.1)) brightness(1.02) contrast(0.98);
 }
 
 * {
@@ -93,5 +97,21 @@ body {
 ::selection {
   background-color: rgba(99, 102, 241, 0.3);
   color: #ffffff;
+}
+
+/* Portrait mask strictly applied to the portrait element alone */
+.portrait-mask {
+  mask-image: linear-gradient(to bottom, black 82%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to bottom, black 82%, transparent 100%);
+}
+
+.portrait-glow-layer {
+  background: var(--portrait-glow);
+  transition: background 0.3s ease;
+}
+
+.portrait-image-styled {
+  filter: var(--portrait-filter);
+  transition: filter 0.3s ease;
 }
 
