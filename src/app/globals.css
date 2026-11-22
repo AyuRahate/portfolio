@@ -25,6 +25,16 @@
   --name-grad-bottom: rgba(212, 163, 89, 0.01);
   --name-stroke: rgba(212, 163, 89, 0.18);
   --name-spotlight: rgba(224, 180, 110, 0.45);
+
+  /* About Section & Typography Tokens (Dark) */
+  --text-strong: #F4F0E8;
+  --text-body: #D1CAC0;
+  --text-muted: #A8A196;
+  --about-card-bg: #1A1918;
+  --about-card-border: rgba(244, 240, 232, 0.08);
+  --about-card-border-hover: rgba(212, 163, 89, 0.28);
+  --about-card-shadow: 0 1px 2px rgba(0, 0, 0, 0.35), 0 8px 24px rgba(0, 0, 0, 0.35);
+  --about-card-shadow-hover: 0 4px 8px rgba(0, 0, 0, 0.4), 0 12px 32px rgba(0, 0, 0, 0.45);
 }
 
 [data-theme="light"] {
@@ -32,8 +42,8 @@
   --foreground: #1C1917;
   --surface: #FAF6F0;
   --surface-elevated: #E8E0D4;
-  --surface-border: rgba(28, 25, 23, 0.08);
-  --surface-border-hover: rgba(28, 25, 23, 0.18);
+  --surface-border: rgba(28, 25, 23, 0.045);
+  --surface-border-hover: rgba(28, 25, 23, 0.16);
   --muted: #E5DDD0;
   --muted-foreground: #78716C;
   --accent: #9E6C28;
@@ -50,6 +60,16 @@
   --name-grad-bottom: rgba(40, 36, 32, 0.02);
   --name-stroke: rgba(158, 108, 40, 0.18);
   --name-spotlight: rgba(158, 108, 40, 0.38);
+
+  /* About Section & Typography Tokens (Light) */
+  --text-strong: #1f1a16;
+  --text-body: #5a5148;
+  --text-muted: #6f655b;
+  --about-card-bg: #FBF8F2;
+  --about-card-border: rgba(60, 40, 20, 0.10);
+  --about-card-border-hover: rgba(158, 108, 40, 0.30);
+  --about-card-shadow: 0 1px 2px rgba(60, 40, 20, 0.06), 0 8px 24px rgba(60, 40, 20, 0.06);
+  --about-card-shadow-hover: 0 3px 6px rgba(60, 40, 20, 0.08), 0 12px 28px rgba(60, 40, 20, 0.10);
 }
 
 * {
@@ -212,3 +232,27 @@ body {
     --name-spotlight: transparent !important;
   }
 }
+
+/* About section card styling */
+.about-card {
+  background-color: var(--about-card-bg);
+  border: 1px solid var(--about-card-border);
+  box-shadow: var(--about-card-shadow);
+  border-radius: 18px;
+  transition: transform 200ms ease, box-shadow 200ms ease, border-color 200ms ease;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .about-card:hover {
+    transform: translateY(-2px);
+    border-color: var(--about-card-border-hover);
+    box-shadow: var(--about-card-shadow-hover);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .about-card:hover {
+    transform: none !important;
+  }
+}
+
