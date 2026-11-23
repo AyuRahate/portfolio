@@ -2,7 +2,7 @@
 
 import React from "react";
 import { motion } from "framer-motion";
-import { Code2, BrainCircuit, Sparkles, Compass, GraduationCap } from "lucide-react";
+import { Code2, BrainCircuit, Sparkles, Compass } from "lucide-react";
 import { personalData } from "@/data/personal";
 
 const iconMap: Record<string, React.ReactNode> = {
@@ -84,42 +84,6 @@ export function About() {
             ))}
           </div>
         </div>
-
-        {/* ── FULL-WIDTH BALANCED EDUCATION CARD STRIP ── */}
-        <motion.div
-          initial={{ opacity: 0, y: 16 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-40px" }}
-          transition={{ duration: 0.5, delay: 0.2 }}
-          className="about-card mt-8 sm:mt-10 p-6 sm:p-7 flex flex-col sm:flex-row sm:items-center justify-between gap-5 group"
-        >
-          <div className="flex items-start sm:items-center gap-4 sm:gap-5">
-            {/* Uniform Graduation Cap Tile */}
-            <div className="w-11 h-11 rounded-xl bg-[var(--accent)]/12 border border-[var(--accent)]/20 flex items-center justify-center shrink-0 transition-transform duration-200 group-hover:scale-105">
-              <GraduationCap className="w-5 h-5 text-[var(--accent)] stroke-[1.8]" />
-            </div>
-
-            <div>
-              <div className="flex items-center gap-2 mb-1">
-                <span className="font-mono text-xs uppercase tracking-[0.14em] text-[var(--accent)] font-semibold">
-                  Education
-                </span>
-              </div>
-              <h3 className="text-base sm:text-lg font-semibold text-[var(--text-strong)] leading-snug">
-                B.Tech in Computer Engineering
-              </h3>
-              <p className="text-sm sm:text-[15px] text-[var(--text-muted)] leading-normal mt-0.5 font-normal">
-                Dwarkadas J. Sanghvi College of Engineering, Mumbai
-              </p>
-            </div>
-          </div>
-
-          <div className="flex items-center sm:self-center shrink-0">
-            <span className="font-mono text-xs sm:text-sm font-semibold text-[var(--text-strong)] px-3.5 py-1.5 rounded-full border border-[var(--about-card-border)] bg-[var(--surface-elevated)]">
-              2024 — 2028
-            </span>
-          </div>
-        </motion.div>
       </div>
     </section>
   );
