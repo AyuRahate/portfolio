@@ -101,7 +101,7 @@ body {
   background-color: var(--background);
   color: var(--foreground);
   font-family: var(--font-inter), system-ui, sans-serif;
-  overflow-x: hidden;
+  overflow-x: clip;
   transition: background-color 0.25s ease, color 0.25s ease;
 }
 
@@ -147,48 +147,54 @@ body {
   width: 100%;
 }
 
-/* Glow behind photo: blurred circle with generous spread and negative inset, unclipped */
+/* Glow behind photo: scaled ~1.3x with warm color and generous soft blur */
 .hero-photo-glow {
   position: absolute;
-  top: 42%;
+  top: 48%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: calc(100% + 140px);
-  height: calc(100% + 140px);
-  max-width: 520px;
-  max-height: 520px;
+  width: calc(100% + 180px);
+  height: calc(100% + 180px);
+  max-width: 680px;
+  max-height: 680px;
   border-radius: 50%;
   background: radial-gradient(circle, var(--glow) 0%, transparent 70%);
-  filter: blur(60px);
+  filter: blur(80px);
   z-index: 0;
   pointer-events: none;
 }
 
-/* Clipping wrapper whose bottom edge stops above the name row */
+@media (max-width: 640px) {
+  .hero-photo-glow {
+    max-width: 340px;
+    max-height: 340px;
+    filter: blur(45px);
+  }
+}
+
+/* Photo container anchored to bottom */
 .hero-photo-clip-frame {
   position: relative;
   z-index: 1;
   width: 100%;
   display: flex;
-  align-items: flex-start;
+  align-items: flex-end;
   justify-content: center;
-  overflow: hidden;
 }
 
-/* Transparent cutout image styling with smooth 70% bottom fade */
+/* Transparent cutout image styling with smooth bottom fade */
 .hero-photo-img {
   position: relative;
   z-index: 1;
   display: block;
   width: auto;
-  height: auto;
-  max-height: 480px;
   object-fit: contain;
+  object-position: bottom;
   pointer-events: none;
   user-select: none;
-  mask-image: linear-gradient(to bottom, #000 70%, transparent 100%);
-  -webkit-mask-image: linear-gradient(to bottom, #000 70%, transparent 100%);
-  filter: drop-shadow(0 18px 30px var(--shadow)) drop-shadow(0 0 1px rgba(212, 163, 89, 0.35)) contrast(1.02);
+  mask-image: linear-gradient(to bottom, #000 75%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to bottom, #000 75%, transparent 100%);
+  filter: drop-shadow(0 20px 35px var(--shadow)) drop-shadow(0 0 1px rgba(212, 163, 89, 0.35)) contrast(1.02);
   transition: filter 0.3s ease;
 }
 
@@ -265,46 +271,46 @@ body {
   }
 }
 
-/* ── Matrix rain background (hero only) ───────────────────────────────── */
+/* ── Dense Digital Matrix Rain (Hero Background) ─────────────────────── */
 
 /* Ensure the hero creates its own stacking context so z-index is local */
 #home {
   isolation: isolate;
 }
 
-.matrix-bg {
+.matrix-rain-container {
   position: absolute;
   inset: 0;
   z-index: 0;
   pointer-events: none;
-  /* gold accent as r,g,b triplet — dark mode (#D4A359) */
+  /* Gold accent as r,g,b triplet — dark mode (#D4A359) */
   --matrix-rgb: 212, 163, 89;
-  opacity: 0.42;
-  /* fade transparent at top and bottom so there's no hard seam */
-  mask-image: linear-gradient(to bottom, transparent 0%, #000 16%, #000 62%, transparent 100%);
-  -webkit-mask-image: linear-gradient(to bottom, transparent 0%, #000 16%, #000 62%, transparent 100%);
+  /* Fade from solid at top to fully transparent by ~70% */
+  mask-image: linear-gradient(to bottom, #000 0%, #000 30%, transparent 70%);
+  -webkit-mask-image: linear-gradient(to bottom, #000 0%, #000 30%, transparent 70%);
+  opacity: 0.22;
 }
 
-.matrix-bg canvas {
+.matrix-rain-canvas {
   display: block;
   width: 100%;
   height: 100%;
 }
 
-/* Soft radial scrim on the left/center so text column stays crisp */
-.matrix-bg::after {
-  content: "";
+/* Soft radial vignette preserving text and portrait contrast */
+.matrix-rain-vignette {
   position: absolute;
   inset: 0;
-  background: radial-gradient(ellipse 60% 75% at 30% 50%, var(--background) 0%, transparent 72%);
-  opacity: 0.80;
+  background: radial-gradient(ellipse 65% 75% at 28% 45%, var(--background) 0%, transparent 75%),
+    radial-gradient(ellipse 55% 65% at 75% 55%, var(--background) 0%, transparent 80%);
+  opacity: 0.85;
   pointer-events: none;
 }
 
-/* Light theme: darker gold, matches dark-mode presence */
-[data-theme="light"] .matrix-bg {
-  --matrix-rgb: 140, 95, 30;
-  opacity: 0.42;
+/* Light theme: warmer darker gold */
+[data-theme="light"] .matrix-rain-container {
+  --matrix-rgb: 181, 130, 50;
+  opacity: 0.24;
 }
 
 /* ── Cinematic Preloader ────────────────────────────────────────────── */

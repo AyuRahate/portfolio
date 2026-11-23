@@ -19,7 +19,7 @@ import {
   Sparkles,
 } from "lucide-react";
 import { personalData } from "@/data/personal";
-import MatrixBackground from "@/components/MatrixBackground";
+import MatrixRain from "@/components/MatrixRain";
 
 const ROLES = [
   "Computer Engineer",
@@ -30,7 +30,6 @@ const ROLES = [
 export function Hero() {
   const heroRef = useRef<HTMLElement>(null);
   const nameRef = useRef<HTMLHeadingElement>(null);
-  const photoClipRef = useRef<HTMLDivElement>(null);
   const rafId = useRef<number | null>(null);
 
   const [currentRoleIndex, setCurrentRoleIndex] = useState(0);
@@ -50,35 +49,6 @@ export function Hero() {
     const onDone = () => setIsReady(true);
     window.addEventListener("preloader:done", onDone, { once: true });
     return () => window.removeEventListener("preloader:done", onDone);
-  }, []);
-
-  // Dynamic clipping boundary for the hero photo:
-  // Clip frame bottom stops 14px above the top of the name row so photo never covers letters or meta text.
-  // Photo scrolls naturally at normal 1x page speed with zero counter-translation.
-  useEffect(() => {
-    const heroEl = heroRef.current;
-    const nameEl = nameRef.current;
-    const clipEl = photoClipRef.current;
-    if (!heroEl || !clipEl || !nameEl) return;
-
-    const computeBounds = () => {
-      const nameRect = nameEl.getBoundingClientRect();
-      const clipRect = clipEl.getBoundingClientRect();
-
-      const nameTopInDoc = nameRect.top + window.scrollY;
-      const clipTopInDoc = clipRect.top + window.scrollY;
-      const maxH = Math.max(180, nameTopInDoc - clipTopInDoc - 14);
-      clipEl.style.maxHeight = `${maxH}px`;
-    };
-
-    computeBounds();
-    const timer = setTimeout(computeBounds, 250);
-    window.addEventListener("resize", computeBounds, { passive: true });
-
-    return () => {
-      clearTimeout(timer);
-      window.removeEventListener("resize", computeBounds);
-    };
   }, []);
 
   // Scroll animation for transition into grid section below
@@ -166,8 +136,8 @@ export function Hero() {
       id="home"
       className="relative min-h-[96vh] flex flex-col justify-between pt-20 sm:pt-24 lg:pt-24 pb-4 sm:pb-6 px-4 sm:px-6 lg:px-8 overflow-hidden isolate bg-[var(--background)] transition-colors"
     >
-      {/* ── MATRIX RAIN BACKGROUND (hero only, z-0, pauses off-screen) ── */}
-      <MatrixBackground density={0.58} />
+      {/* ── DENSE DIGITAL MATRIX RAIN BACKGROUND (hero only, z-0, pauses off-screen) ── */}
+      <MatrixRain />
       {/* ── TOP META STRIP (Clean editorial spacing below fixed navbar) ── */}
       <motion.div
         initial={{ opacity: 0, y: -10 }}
@@ -191,13 +161,13 @@ export function Hero() {
       </motion.div>
 
       {/* ── MAIN HERO GRID ── */}
-      <div className="max-w-7xl mx-auto w-full grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start my-auto py-6 sm:py-8 lg:py-10 z-10">
+      <div className="max-w-7xl mx-auto w-full grid grid-cols-1 lg:grid-cols-[1.1fr_0.9fr] gap-8 lg:gap-10 items-end my-auto py-6 sm:py-8 lg:py-6 z-10">
         {/* Left Column: Typography, Dynamic Role & CTAs */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={isReady ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
           transition={{ duration: 0.7, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
-          className="lg:col-span-7 flex flex-col items-start relative z-30"
+          className="w-full min-w-0 flex flex-col items-start relative z-30"
         >
           {/* Small Category Label & Synced Counter */}
           <div className="flex flex-wrap items-center gap-3 mb-6">
@@ -212,11 +182,11 @@ export function Hero() {
             </span>
           </div>
 
-          {/* Large Tight-Tracked Display Headline */}
-          <h1 className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-extrabold tracking-[-0.035em] text-[var(--foreground)] leading-[1.08] mb-6">
+          {/* Large Tight-Tracked Fluid Display Headline */}
+          <h1 className="text-[clamp(2.5rem,5.5vw,5.25rem)] font-extrabold tracking-[-0.035em] text-[var(--foreground)] leading-[1.08] mb-6">
             Hi, I&apos;m Ayush.
             <br />
-            <span className="text-[var(--muted-foreground)] font-normal text-3xl sm:text-4xl lg:text-5xl xl:text-6xl">
+            <span className="text-[var(--muted-foreground)] font-normal text-[clamp(1.75rem,4vw,3.75rem)]">
               I am a{" "}
             </span>
             <span className="inline-block relative">
@@ -227,12 +197,11 @@ export function Hero() {
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: -12 }}
                   transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
-                  className="inline-block text-[var(--accent)] font-extrabold tracking-[-0.03em]"
+                  className="inline-block text-[var(--accent)] font-extrabold tracking-[-0.03em] whitespace-nowrap"
                 >
-                  {ROLES[currentRoleIndex]}
+                  {ROLES[currentRoleIndex]}.
                 </motion.span>
               </AnimatePresence>
-              <span className="text-[var(--accent)]">.</span>
             </span>
           </h1>
 
@@ -307,32 +276,27 @@ export function Hero() {
           </div>
         </motion.div>
 
-        {/* Right Column: Editorial Portrait Cutout with Unclipped Glow & Frame Clipping */}
+        {/* Right Column: Editorial Portrait Cutout with Scaled Glow & Grounded Anchoring */}
         <motion.div
           initial={{ opacity: 0, y: 24 }}
           animate={isReady ? { opacity: 1, y: 0 } : { opacity: 0, y: 24 }}
           transition={{ duration: 0.8, delay: 0.25, ease: [0.16, 1, 0.3, 1] }}
-          className="lg:col-span-5 relative z-20 flex justify-center items-start lg:pt-1"
+          className="relative z-20 flex justify-center lg:justify-end items-end w-full lg:translate-x-2 xl:translate-x-6"
         >
-          {/* Unclipped circular ambient glow with generous negative spread */}
+          {/* Scaled gold radial glow (1.3x) */}
           <div className="hero-photo-glow" aria-hidden="true" />
 
-          {/* Photo clipping frame: strictly bounded above the name row, clips photo at bottom */}
-          <div
-            ref={photoClipRef}
-            className="hero-photo-clip-frame"
-          >
-            <div className="relative w-full flex justify-center items-start">
-              <Image
-                src={personalData.portraitImage || "/images/ayush-portrait.webp"}
-                alt="Ayush Rahate — Portrait"
-                width={442}
-                height={826}
-                priority
-                className="hero-photo-img"
-                sizes="(max-width: 640px) 240px, (max-width: 1024px) 300px, 360px"
-              />
-            </div>
+          {/* Photo container grounded at the bottom, extending slightly right */}
+          <div className="relative flex justify-center lg:justify-end items-end w-full overflow-visible">
+            <Image
+              src={personalData.portraitImage || "/images/ayush-portrait.webp"}
+              alt="Ayush Rahate — Portrait"
+              width={540}
+              height={1008}
+              priority
+              className="hero-photo-img h-[360px] sm:h-[480px] lg:h-[620px] xl:h-[700px] w-auto object-contain object-bottom"
+              sizes="(min-width: 1024px) 45vw, 100vw"
+            />
           </div>
         </motion.div>
       </div>
