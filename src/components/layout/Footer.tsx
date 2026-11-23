@@ -25,7 +25,7 @@ export function Footer() {
               target="_blank"
               rel="noopener noreferrer"
               aria-label="GitHub profile"
-              className="w-9 h-9 rounded-lg border border-[var(--surface-border)] bg-[var(--surface)] hover:border-[var(--surface-border-hover)] text-[var(--muted-foreground)] hover:text-[var(--foreground)] flex items-center justify-center transition-colors"
+              className="w-9 h-9 rounded-full border border-[var(--surface-border)] bg-[var(--surface)] hover:border-[var(--accent)] text-[var(--muted-foreground)] hover:text-[var(--foreground)] flex items-center justify-center transition-colors"
             >
               <Github className="w-4 h-4" />
             </a>
@@ -36,7 +36,7 @@ export function Footer() {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="LinkedIn profile"
-                className="w-9 h-9 rounded-lg border border-[var(--surface-border)] bg-[var(--surface)] hover:border-[var(--surface-border-hover)] text-[var(--muted-foreground)] hover:text-[var(--foreground)] flex items-center justify-center transition-colors"
+                className="w-9 h-9 rounded-full border border-[var(--surface-border)] bg-[var(--surface)] hover:border-[var(--accent)] text-[var(--muted-foreground)] hover:text-[var(--foreground)] flex items-center justify-center transition-colors"
               >
                 <Linkedin className="w-4 h-4" />
               </a>
@@ -45,7 +45,7 @@ export function Footer() {
             <a
               href={`mailto:${personalData.email}`}
               aria-label="Send email"
-              className="w-9 h-9 rounded-lg border border-[var(--surface-border)] bg-[var(--surface)] hover:border-[var(--surface-border-hover)] text-[var(--muted-foreground)] hover:text-[var(--foreground)] flex items-center justify-center transition-colors"
+              className="w-9 h-9 rounded-full border border-[var(--surface-border)] bg-[var(--surface)] hover:border-[var(--accent)] text-[var(--muted-foreground)] hover:text-[var(--foreground)] flex items-center justify-center transition-colors"
             >
               <Mail className="w-4 h-4" />
             </a>

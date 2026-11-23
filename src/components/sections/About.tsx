@@ -33,7 +33,7 @@ export function About() {
         {/* ── TWO-COLUMN BALANCED GRID ── */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 xl:gap-16 items-stretch">
           {/* Left Column: Heading + Tightened Paragraphs */}
-          <div className="lg:col-span-6 flex flex-col justify-between">
+          <div className="lg:col-span-6 flex flex-col justify-center">
             <div>
               <h2
                 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-[-0.03em] text-[var(--text-strong)] leading-[1.1] mb-6 sm:mb-8"

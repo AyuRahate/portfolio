@@ -109,7 +109,7 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
       </head>
-      <body className="min-h-screen bg-[var(--background)] text-[var(--foreground)] antialiased transition-colors selection:bg-indigo-500/30 selection:text-white">
+      <body className="min-h-screen bg-[var(--background)] text-[var(--foreground)] antialiased transition-colors">
         <ThemeProvider>
           <Preloader />
           <div className="relative flex min-h-screen flex-col bg-grid-pattern">

@@ -278,7 +278,7 @@ export function Skills() {
             ref={(el) => {
               panelRefs.current[idx] = el;
             }}
-            className="sticky top-0 min-h-screen w-full flex items-center justify-center bg-[var(--background)] bg-grid-pattern border-t border-[var(--surface-border)]/40 px-4 sm:px-8 lg:px-16 py-12"
+            className="sticky top-0 min-h-screen w-full flex items-center justify-center bg-[var(--background)] bg-grid-pattern border-t border-[var(--surface-border)]/40 px-4 sm:px-8 lg:px-16 py-12 scroll-mt-20"
             style={{ zIndex: idx + 10 }}
           >
             <div className="max-w-7xl w-full mx-auto grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-14 items-center">

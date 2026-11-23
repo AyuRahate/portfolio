@@ -27,10 +27,10 @@ export function Contact() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-40px" }}
           transition={{ duration: 0.6 }}
-          className="rounded-3xl border border-[var(--surface-border)] bg-[var(--surface)] p-8 sm:p-12 text-center relative overflow-hidden shadow-card"
+          className="rounded-3xl border border-[var(--surface-border)] bg-[var(--surface)] p-8 sm:p-14 text-center relative overflow-hidden shadow-card"
         >
-          {/* Ambient lighting inside card */}
-          <div className="absolute top-0 left-1/2 -translate-x-1/2 w-96 h-48 bg-gradient-to-b from-indigo-500/20 via-purple-500/10 to-transparent rounded-full blur-3xl -z-10" />
+          {/* Ambient lighting inside card — gold accent glow */}
+          <div className="absolute top-0 left-1/2 -translate-x-1/2 w-96 h-48 bg-gradient-to-b from-[var(--accent)]/15 via-[var(--accent)]/5 to-transparent rounded-full blur-3xl -z-10" />
 
           {/* Section Label */}
           <div className="inline-flex items-center gap-2 mb-4">
@@ -41,7 +41,7 @@ export function Contact() {
           </div>
 
           {/* Headline */}
-          <h2 className="text-3xl sm:text-5xl font-extrabold tracking-tight text-[var(--foreground)] mb-4">
+          <h2 className="text-3xl sm:text-5xl font-black tracking-tight text-[var(--foreground)] mb-4">
             Let&apos;s Build Something Meaningful.
           </h2>
 

@@ -22,7 +22,7 @@ export function Projects() {
                 Featured Engineering
               </span>
             </div>
-            <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-[var(--foreground)]">
+            <h2 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-[var(--foreground)]">
               Highlighted Projects
             </h2>
           </div>
@@ -53,8 +53,8 @@ export function Projects() {
                     sizes="(max-width: 768px) 100vw, 600px"
                   />
                 ) : (
-                  <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-indigo-950/40 to-slate-900/60 p-6">
-                    <Layers className="w-12 h-12 text-indigo-400/50" />
+                  <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-[var(--surface-elevated)] to-[var(--surface)] p-6">
+                    <Layers className="w-12 h-12 text-[var(--accent)]/40" />
                   </div>
                 )}
 

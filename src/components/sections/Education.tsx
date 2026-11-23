@@ -189,8 +189,8 @@ export function Education() {
 
                     <div
                       className={`w-10 h-10 rounded-full border-2 bg-[var(--surface)] flex items-center justify-center transition-all duration-300 shadow-md ${item.isCurrent
-                          ? "border-[var(--accent)] text-[var(--accent)] shadow-[0_0_16px_rgba(212,163,89,0.4)]"
-                          : "border-[var(--surface-border)] text-[var(--muted-foreground)] group-hover:border-[var(--accent)]"
+                        ? "border-[var(--accent)] text-[var(--accent)] shadow-[0_0_16px_rgba(212,163,89,0.4)]"
+                        : "border-[var(--surface-border)] text-[var(--muted-foreground)] group-hover:border-[var(--accent)]"
                         }`}
                     >
                       {getEducationIcon(item.iconName)}
@@ -199,13 +199,13 @@ export function Education() {
 
                   {/* Card Container (Alternates left/right on md+; offset to right on mobile) */}
                   <div
-                    className={`w-full pl-16 sm:pl-20 md:pl-0 md:w-[calc(50%-40px)] ${isEven ? "md:mr-auto" : "md:ml-auto"
+                    className={`w-full pl-12 sm:pl-20 md:pl-0 md:w-[calc(50%-40px)] ${isEven ? "md:mr-auto" : "md:ml-auto"
                       }`}
                   >
                     <div
                       className={`relative rounded-2xl border bg-[var(--surface)] p-6 sm:p-7 shadow-card transition-all duration-300 hover:border-[var(--accent)]/50 group ${item.isCurrent
-                          ? "border-[var(--accent)]/40 shadow-[0_4px_24px_rgba(212,163,89,0.08)]"
-                          : "border-[var(--surface-border)]"
+                        ? "border-[var(--accent)]/40 shadow-[0_4px_24px_rgba(212,163,89,0.08)]"
+                        : "border-[var(--surface-border)]"
                         }`}
                     >
                       {/* Ambient corner glow for current item */}
